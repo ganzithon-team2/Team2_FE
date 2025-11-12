@@ -1,9 +1,19 @@
-// 회원가입 / 로그인 페이지
+// /
 import React from "react";
-import * as A from "../../styles/StyledAuth";
+import { Card, LoginButton } from "../../styles/StyledAuth";
+import logo from "/images/auth/kakaoLogo.png";
 
 const AuthPage = () => {
-  return <div>회원가입/로그인 입니다.</div>;
+  return (
+    <div>
+      <Card title="가입하기" subtitle="계정에 로그인을 해주세요.">
+        <LoginButton>
+          <img src={logo} style={{ width: "17px", marginRight: "9px" }} />
+          카카오로 로그인
+        </LoginButton>
+      </Card>
+    </div>
+  );
 };
 
 export default AuthPage;
