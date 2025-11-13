@@ -38,7 +38,7 @@ const Layout = () => {
   return (
     <Container>
       <Box>
-        <Header />
+        {isShowNav && <Header />}
         <Outlet />
         {isShowNav && <NavigationBar />}
       </Box>
