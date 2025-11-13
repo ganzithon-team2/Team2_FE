@@ -17,7 +17,7 @@ function App() {
           <Route path="/MainPage" element={<MainPage />} />
           <Route path="/ChatbotPage" element={<ChatbotPage />} />
           <Route path="/SearchPage" element={<SearchPage />} />
-          <Route path="/Detail/:id" element={<Detail />} />
+          <Route path="/detail/:desertionNo" element={<Detail />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -36,7 +36,7 @@ export const mock = [
     age: 3,
     sex: "여아",
     noticeEndDate: "2025-11-10",
-    desertionNo: "448567202501695", //보호번호
+    desertionNo: "448567202501691", //보호번호
     shelterName: "한국유기동물보호협회",
     animalTypeName: "개",
   },
@@ -46,7 +46,7 @@ export const mock = [
     age: 3,
     sex: "여아",
     noticeEndDate: "2025-11-10",
-    desertionNo: "448567202501695", //보호번호
+    desertionNo: "448567202501680", //보호번호
     shelterName: "한국유기동물보호협회",
     animalTypeName: "고양이",
   },
@@ -56,7 +56,7 @@ export const mock = [
     age: 3,
     sex: "여아",
     noticeEndDate: "2025-11-10",
-    desertionNo: "448567202501695", //보호번호
+    desertionNo: "448567202501681", //보호번호
     shelterName: "한국유기동물보호협회",
     animalTypeName: "고양이",
   },
@@ -66,7 +66,7 @@ export const mock = [
     age: 3,
     sex: "여아",
     noticeEndDate: "2025-11-10",
-    desertionNo: "448567202501695", //보호번호
+    desertionNo: "448567202501682", //보호번호
     shelterName: "한국유기동물보호협회",
     animalTypeName: "고양이",
   },
