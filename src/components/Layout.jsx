@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Outlet, useLocation } from "react-router-dom";
+import Header from "./Header";
 import NavigationBar from "./NavigationBar";
 
 const Container = styled.div`
@@ -22,7 +23,7 @@ const Box = styled.div`
   height: 100%;
   max-width: 390px;
   max-height: 844px;
-  background: #fff;
+  background: url("../images/components/Background.png");
   display: flex;
   flex-direction: column;
   cursor: default;
@@ -34,11 +35,10 @@ const Layout = () => {
 
   const navPages = ["/MainPage", "/SavePage", "/SearchPage", "/ChatbotPage"];
   const isShowNav = navPages.includes(location.pathname);
-
-  console.log("현재 경로는: ", location.pathname);
   return (
     <Container>
       <Box>
+        <Header />
         <Outlet />
         {isShowNav && <NavigationBar />}
       </Box>

@@ -6,6 +6,8 @@ import AuthPage from "./pages/auth/AuthPage";
 import ChatbotPage from "./pages/chatbot/ChatbotPage";
 import SearchPage from "./pages/search/searchPage";
 import SavePage from "./pages/save/SavePage";
+import Detail from "./pages/detail/Detail";
+
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
           <Route path="/ChatbotPage" element={<ChatbotPage />} />
           <Route path="/SearchPage" element={<SearchPage />} />
           <Route path="/SavePage" element={<SavePage />} />
+          <Route path="/Detail/:id" element={<Detail />} />
         </Route>
       </Routes>
     </BrowserRouter>
