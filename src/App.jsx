@@ -21,6 +21,7 @@ function App() {
           <Route path="/SearchPage" element={<SearchPage />} />
           <Route path="/SavePage" element={<SavePage />} />
           <Route path="/Detail/:id" element={<Detail />} />
+          <Route path="/detail/:desertionNo" element={<Detail />} />
         </Route>
       </Routes>
     </BrowserRouter>

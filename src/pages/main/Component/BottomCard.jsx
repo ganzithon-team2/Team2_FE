@@ -6,14 +6,17 @@ const BottomCard = ({ data }) => {
   const navigate = useNavigate();
 
   // 버튼 클릭 시 상세페이지로 이동
-  const handleClick = () => {
-    navigate(`/detail/${data.desertionNo}`);
-  };
+  //   const handleClick = () => {
+  //     navigate(`/detail/${item.desertionNo}`);
+  //   };
 
   return (
     <B.Container>
-      {data.map((item) => (
-        <B.Box key={item.desertionNo} onClick={handleClick}>
+      {data.map((item, idx) => (
+        <B.Box
+          key={`${item.desertionNo}-${idx}`}
+          onClick={() => navigate(`/detail/${item.desertionNo}`)}
+        >
           <B.Img src={item.images} alt={item.breedName} />
           <B.Code>
             보호번호 <br />
