@@ -15,7 +15,7 @@ const TopCardList = () => {
     container.style.scrollBehavior = "auto";
 
     const cardWidth = container.clientWidth * 0.8 + 20;
-    const middleIndex = mock.length * 2; 
+    const middleIndex = mock.length * 2;
 
     container.scrollLeft = cardWidth * middleIndex;
 
@@ -60,7 +60,7 @@ const ScrollContainer = styled.div`
 `;
 
 const CardWrapper = styled.div`
-  flex: 0 0 80%; 
+  flex: 0 0 80%;
   scroll-snap-align: center;
   display: flex;
   justify-content: center;
