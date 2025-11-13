@@ -5,6 +5,7 @@ import MainPage from "./pages/main/MainPage";
 import AuthPage from "./pages/auth/AuthPage";
 import ChatbotPage from "./pages/chatbot/ChatbotPage";
 import SearchPage from "./pages/search/searchPage";
+import Detail from "./pages/detail/Detail";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/MainPage" element={<MainPage />} />
           <Route path="/ChatbotPage" element={<ChatbotPage />} />
           <Route path="/SearchPage" element={<SearchPage />} />
+          <Route path="/detail/:desertionNo" element={<Detail />} />
         </Route>
       </Routes>
     </BrowserRouter>

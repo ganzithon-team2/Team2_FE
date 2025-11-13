@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
+import Header from "./Header"
 
 const Container = styled.div`
   width: 100vw;
@@ -21,7 +22,7 @@ const Box = styled.div`
   height: 100%;
   max-width: 390px;
   max-height: 844px;
-  background: #fff;
+  background: url("../images/components/Background.png");
   display: flex;
   flex-direction: column;
   cursor: default;
@@ -32,6 +33,7 @@ const Layout = () => {
   return (
     <Container>
       <Box>
+        <Header />
         <Outlet />
       </Box>
     </Container>
