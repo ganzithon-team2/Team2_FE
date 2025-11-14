@@ -47,12 +47,18 @@ const Text = styled.p`
 `;
 const KaKaoButtonWrapper = styled.div`
   margin-top: 3px;
+  display: flex;
 `;
 
 const KaKaoLoginButton = styled.button`
   width: 300px;
   height: 45px;
   margin-top: 37px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   background-color: #fee500;
   color: #000000;
 `;
@@ -87,11 +93,23 @@ function AppLogo() {
   return <RebornLogo src={textLogo} />;
 }
 function LoginButtonWrapper({ children }) {
-  <KaKaoButtonWrapper>{children}</KaKaoButtonWrapper>;
+  return <KaKaoButtonWrapper>{children}</KaKaoButtonWrapper>;
 }
 
 function LoginButton({ children }) {
-  return <KaKaoLoginButton>{children}</KaKaoLoginButton>;
+  return (
+    <KaKaoLoginButton>
+      <img
+        src={kakaoLogo}
+        style={{
+          width: "18px",
+          position: "absolute",
+          left: "20px",
+        }}
+      />
+      {children}
+    </KaKaoLoginButton>
+  );
 }
 
 function CardInfo({ children }) {
