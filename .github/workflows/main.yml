@@ -1,17 +1,16 @@
-name: Develop CI
+name: Develop CI/CD
 
 on:
   push:
-    branches: [ "develop" ]
-  pull_request:
-    branches: [ "develop" ]
+    branches: ["develop"]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -21,5 +20,18 @@ jobs:
       - name: Install deps
         run: npm install
 
-      - name: Build test
+      - name: Build
         run: npm run build
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            cd ${{ secrets.EC2_PROJECT_PATH }}
+            git pull origin develop
+            npm install
+            npm run build
+            pm2 reload all
