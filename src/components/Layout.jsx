@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Outlet } from "react-router-dom";
-import Header from "./Header"
+import { Outlet, useLocation } from "react-router-dom";
+import Header from "./Header";
+import NavigationBar from "./NavigationBar";
 
 const Container = styled.div`
   width: 100vw;
@@ -26,15 +27,38 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   cursor: default;
-  overflow-y: hidden;
+  // overflow-y: hidden;
   overflow-x: hidden;
+
+  /* Chrome, Safari, Edge */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* Optional: iOS smooth */
+  -webkit-overflow-scrolling: touch;
 `;
 const Layout = () => {
+  const location = useLocation();
+
+  const navPages = ["/mainPage", "/SavePage", "/SearchPage", "/ChatbotPage"];
+  const isShowNav = navPages.includes(location.pathname);
+
+  const backBtnPages = ["/detail"];
+  // 로그인페이지면 숨기기
+  const isAuthPage = location.pathname === "/";
+  const isBackPage = backBtnPages.some((path) =>
+    location.pathname.startsWith(path)
+  );
   return (
     <Container>
       <Box>
-        <Header />
+        {!isAuthPage && <Header type={isBackPage ? "back" : "logo"} />}
         <Outlet />
+        {isShowNav && <NavigationBar />}
       </Box>
     </Container>
   );
