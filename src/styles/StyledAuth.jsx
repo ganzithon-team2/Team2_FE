@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import kakaoLogo from "/images/auth/kakaoLogo.png";
 import textLogo from "/images/auth/TextLogo.png";
 import introduction from "/images/auth/Introduction.png";
+import ribbonPuppys from "/images/auth/RibbonPuppys.png";
 
 const PuppyImageWrapper = styled.div`
   display: flex;
@@ -73,10 +74,15 @@ function Introduction() {
     </IntroductionWrapper>
   );
 }
-function ImageWrapper({ children }) {
+function ImageWrapper() {
   return (
     <PuppyImageWrapper>
-      {children}
+      <img
+        src={ribbonPuppys}
+        style={{
+          width: "246px",
+        }}
+      />
       <Introduction></Introduction>
     </PuppyImageWrapper>
   );

@@ -34,6 +34,7 @@ const Box = styled.div`
 `;
 const Layout = () => {
   const location = useLocation();
+  const noLayoutPages = ["/", "/WelcomePage"];
   const backgroundMap = {
     "/": loginBg,
     "/WelcomePage": loginBg,
@@ -42,9 +43,9 @@ const Layout = () => {
   return (
     <Container>
       <Box backgroundImage={backgroundMap[location.pathname]}>
-        {location.pathname != "/" || ("WelecomePage" && <Header />)}
+        {!noLayoutPages.includes(location.pathname) && <Header />}
         <Outlet />
-        {location.pathname != "/" || ("WelecomePage" && <NavigationBar />)}
+        {!noLayoutPages.includes(location.pathname) && <NavigationBar />}
       </Box>
     </Container>
   );
