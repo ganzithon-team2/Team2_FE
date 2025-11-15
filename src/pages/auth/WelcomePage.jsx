@@ -8,8 +8,10 @@ import {
 } from "../../styles/StyledAuth";
 import ribbonPuppys from "/images/auth/RibbonPuppys.png";
 import rightImg from "/images/auth/chevron-right.png";
+import { useNavigate } from "react-router-dom";
 
 const WelcomePage = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <ImageWrapper>
@@ -23,7 +25,7 @@ const WelcomePage = () => {
       <WelcomeWrapper>
         <WelcomeName>리본님</WelcomeName>
         <WelcomeSub>가입을 환영합니다</WelcomeSub>
-        <GoToMainButton>
+        <GoToMainButton onClick={() => navigate("/MainPage")}>
           🐾 동물 보러가기
           <img src={rightImg} style={{ width: "22px" }} />
         </GoToMainButton>
