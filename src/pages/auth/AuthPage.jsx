@@ -2,6 +2,7 @@
 import React from "react";
 import {
   ImageWrapper,
+  Introduction,
   Card,
   AppLogo,
   CardInfo,
@@ -21,13 +22,12 @@ const AuthPage = () => {
           }}
         />
       </ImageWrapper>
+      <Introduction />
       <Card>
         <AppLogo />
         <CardInfo>계정에 로그인을 해주세요.</CardInfo>
 
-        
-          <LoginButton>카카오 로그인</LoginButton>
-        
+        <LoginButton>카카오 로그인</LoginButton>
       </Card>
     </div>
   );

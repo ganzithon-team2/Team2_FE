@@ -15,6 +15,7 @@ const PuppyImageWrapper = styled.div`
 const IntroductionWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 // const StyledCardWrapper = style.div`
@@ -64,6 +65,50 @@ const KaKaoLoginButton = styled.button`
   color: #000000;
 `;
 
+// WelcomePage style
+export const WelcomeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+`;
+
+export const WelcomeName = styled.p`
+  color: var(--Neutral-Colors-500, #868da6);
+  text-align: center;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 24px */
+  letter-spacing: -0.5px;
+`;
+
+export const WelcomeSub = styled.p`
+  color: var(--Neutral-Colors-500, #868da6);
+  text-align: center;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 22.5px */
+`;
+
+export const GoToMainButton = styled.button`
+  display: inline-flex;
+  padding: 12px 12px 12px 16px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 26px;
+  border-radius: 8px;
+  border: 0.7px solid #d3d3d3;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+`;
+
 function Introduction() {
   return (
     <IntroductionWrapper>
@@ -83,7 +128,6 @@ function ImageWrapper() {
           width: "246px",
         }}
       />
-      <Introduction></Introduction>
     </PuppyImageWrapper>
   );
 }
@@ -123,6 +167,7 @@ function CardInfo({ children }) {
 }
 export {
   ImageWrapper,
+  Introduction,
   Card,
   CardWrapper,
   CardInfo,
