@@ -47,7 +47,13 @@ const Box = styled.div`
 
 const Layout = () => {
   const location = useLocation();
-  const navPages = ["/MainPage", "/SavePage", "/SearchPage", "/ChatbotPage"];
+  const navPages = [
+    "/MainPage",
+    "/SavePage",
+    "/SearchPage",
+    "/ChatbotPage",
+    "/Shelter",
+  ];
   const isShowNav = navPages.includes(location.pathname);
 
   const backBtnPages = ["/detail"];

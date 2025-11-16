@@ -70,7 +70,7 @@ const Header = ({ type }) => {
           <BackBtn
             src="../images/components/Backbtn.svg"
             alt="Backbtn"
-            onClick={() => navigate("/MainPage")}
+            onClick={() => navigate(-1)}
           />
         )}
         {type === "back" && (
