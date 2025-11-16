@@ -5,7 +5,7 @@ import MainPage from "./pages/main/MainPage";
 import WelcomePage from "./pages/auth/WelcomePage";
 import AuthPage from "./pages/auth/AuthPage";
 import ChatbotPage from "./pages/chatbot/ChatbotPage";
-import SearchPage from "./pages/search/searchPage";
+import SearchPage from "./pages/search/SearchPage";
 import SavePage from "./pages/save/SavePage";
 import Detail from "./pages/detail/Detail";
 import OidcCallback from "./pages/auth/OidcCallback";
