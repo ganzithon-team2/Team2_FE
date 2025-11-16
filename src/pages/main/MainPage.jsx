@@ -1,7 +1,7 @@
 // 메인 페이지
 import React, { useState } from "react";
 import * as M from "../../styles/StyledMain";
-import TopCardList from "./component/TopCardList";
+import TopCardList from "./Component/TopCardList";
 import BottomCard from "./Component/BottomCard";
 import { useNavigate } from "react-router-dom";
 import { mock } from "./Component/mockData.js";
