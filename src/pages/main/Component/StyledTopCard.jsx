@@ -67,6 +67,7 @@ export const Date = styled.div`
   padding: 1px 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   margin-left: 10px;
+  margin-top: 9px;
 `;
 export const GotoDetail = styled.div`
   width: 90px;

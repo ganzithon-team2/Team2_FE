@@ -10,6 +10,9 @@ import SavePage from "./pages/save/SavePage";
 import Detail from "./pages/detail/Detail";
 import OidcCallback from "./pages/auth/OidcCallback";
 
+import Filter from "./pages/filter/Filter";
+import Shelter from "./pages/detail/Shelter";
+
 function App() {
   return (
     <BrowserRouter>
@@ -24,7 +27,10 @@ function App() {
           <Route path="/ChatbotPage" element={<ChatbotPage />} />
           <Route path="/SearchPage" element={<SearchPage />} />
           <Route path="/SavePage" element={<SavePage />} />
+          {/* <Route path="/Detail/:id" element={<Detail />} /> */}
           <Route path="/detail/:desertionNo" element={<Detail />} />
+          <Route path="/Filter" element={<Filter />} />
+          <Route path="/Shelter" element={<Shelter />} />
         </Route>
       </Routes>
     </BrowserRouter>

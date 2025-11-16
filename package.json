@@ -10,11 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.5",
     "axios": "^1.13.2",
     "oidc-client-ts": "^3.4.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.5",
+    "react-select": "^5.10.2",
     "react-swipeable": "^7.0.2",
     "styled-components": "^6.1.19",
     "swr": "^2.3.6",

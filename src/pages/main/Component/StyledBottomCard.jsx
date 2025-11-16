@@ -3,23 +3,22 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  margin-top: 10px;
 `;
 export const Box = styled.div`
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 10px 10px;
   display: flex;
-  width: 150px;
-  height: 225px;
+
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+
   flex-shrink: 0;
   cursor: pointer;
-  box-shadow: 3px 2px 6.6px rgba(0, 0, 0, 0.25);
+
   border-radius: 24px;
-  margin-top: 25px;
-  margin-bottom: 10px;
-  //   background: #fcffe4ff;
+  margin-top: 10px;
+
   transition: all 0.2s ease;
   &:hover {
     transform: translateY(-4px); /* 위로 4px 떠오름 */
@@ -27,11 +26,13 @@ export const Box = styled.div`
   }
 `;
 export const Img = styled.img`
-  width: 130px;
-  height: 140px;
-  border-radius: 24px;
+  width: 160px;
+  height: 225px;
+  border-radius: 15px;
   object-fit: cover;
   object-position: center;
+  box-shadow: 3px 2px 6.6px rgba(0, 0, 0, 0.25);
+  margin-bottom: 7px;
 `;
 export const Code = styled.div`
   overflow: hidden;

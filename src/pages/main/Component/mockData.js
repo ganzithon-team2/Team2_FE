@@ -13,10 +13,10 @@ export const mock = [
     age: "2023(년생)",
     weight: "13.5(Kg)",
     status: "보호중",
-    province: "경상남도",
-    city: "창원시",
+    province: "서울특별시",
+    city: "강남구",
     noticeStartDate: "20251105",
-    noticeEndDate: "20251117",
+    noticeEndDate: "20251110",
     shelterName: "창원동물보호센터",
     shelterTel: "055-225-5701",
     shelterAddress:
@@ -47,7 +47,7 @@ export const mock = [
     province: "경상남도",
     city: "창원시",
     noticeStartDate: "20251105",
-    noticeEndDate: "20251117",
+    noticeEndDate: "20251110",
     shelterName: "창원동물보호센터",
     shelterTel: "055-225-5701",
     shelterAddress:
@@ -133,7 +133,7 @@ export const mock = [
     province: "경상남도",
     city: "창원시",
     noticeStartDate: "20251105",
-    noticeEndDate: "20251117",
+    noticeEndDate: "20251113",
     shelterName: "창원동물보호센터",
     shelterTel: "055-225-5701",
     shelterAddress:

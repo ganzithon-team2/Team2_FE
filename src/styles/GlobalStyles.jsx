@@ -25,41 +25,6 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-display: swap;
   }
-
-  @font-face {
-    font-family: 'GangwonEduAll';
-    src: url('/fonts/GangwonEduAll-Light.woff') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'Cafe24Ohsquare';
-    src: url('/fonts/Cafe24Ohsquare-v2.0.ttf') format('truetype');
-    font-weight: normal;
-  }
-
-  @font-face {
-    font-family: 'SeoulAlrim';
-    src: url('/fonts/SeoulAlrimTTF-Heavy.woff2') format('woff2'),
-      url('/fonts/SeoulAlrimTTF-Heavy.woff') format('woff'),
-      url('/fonts/SeoulAlrimTTF-Heavy.ttf') format('truetype');
-    font-weight: normal;
-  }
-
-  @font-face {
-    font-family: 'Great Vibes';
-    src: url('/fonts/GreatVibes-Regular.ttf') format('truetype');
-    font-weight: normal;
-  }
-
-  @font-face {
-    font-family: 'Pretendard';
-    src: url('/fonts/Pretendard-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-  }
-
   body {
     background-color: #f0f0f0;
     height: 100%;
