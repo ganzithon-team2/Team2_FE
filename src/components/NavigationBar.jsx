@@ -105,14 +105,14 @@ const NavigationBar = () => {
         {tabs.map((tab) => (
           <NavItem
             key={tab.path}
-            active={location.pathname === tab.path}
+            $active={location.pathname === tab.path}
             onClick={() => navigate(tab.path)}
           >
             <img
               src={tab.icon}
               style={{ width: "24px", marginBotton: "4px" }}
             />
-            <text style={{ padding: "3px" }}>{tab.label}</text>
+            <p style={{ padding: "3px" }}>{tab.label}</p>
           </NavItem>
         ))}
       </NavBar>

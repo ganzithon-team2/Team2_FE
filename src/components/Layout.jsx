@@ -25,7 +25,7 @@ const Box = styled.div`
   height: 100%;
   max-width: 390px;
   max-height: 844px;
-  background-image: url(${(props) => props.backgroundImage});
+  background-image: url(${(props) => props.$backgroundImage});
   display: flex;
   flex-direction: column;
   cursor: default;
@@ -51,17 +51,28 @@ const Layout = () => {
 
   const backBtnPages = ["/detail"];
 
+  const onlyBackPage = ["/Filter", "/Shelter"];
+
   const isAuthPage =
     location.pathname === "/" || location.pathname === "/WelcomePage";
-  const isBackPage = backBtnPages.some((path) =>
-    location.pathname.startsWith(path)
-  );
+
+  // const isBackPage = backBtnPages.some((path) =>
+  //   location.pathname.startsWith(path)
+  // );
+
+  let headerType = "logo";
+
+  if (onlyBackPage.some((path) => location.pathname.startsWith(path))) {
+    headerType = "onlyBack";
+  } else if (backBtnPages.some((path) => location.pathname.startsWith(path))) {
+    headerType = "back";
+  }
 
   const backgroundImage = isAuthPage ? loginBg : defaultBg;
   return (
     <Container>
-      <Box backgroundImage={backgroundImage}>
-        {!isAuthPage && <Header type={isBackPage ? "back" : "logo"} />}
+      <Box $backgroundImage={backgroundImage}>
+        {!isAuthPage && <Header type={headerType} />}
         <Outlet />
         {isShowNav && <NavigationBar />}
       </Box>

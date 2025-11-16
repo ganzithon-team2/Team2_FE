@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import * as D from "../../styles/StyledDetail";
 import { mock } from "../main/Component/mockData";
+import { useNavigate } from "react-router-dom";
 
 const Detail = () => {
   const { desertionNo } = useParams();
+  const navigate = useNavigate();
 
   const item = mock.find((v) => String(v.desertionNo) === String(desertionNo));
 
@@ -107,7 +109,7 @@ const Detail = () => {
             </D.SlideWrap>
 
             {/* 보호소 페이지 바로가기 */}
-            <D.BtnBox>
+            <D.BtnBox onClick={() => navigate("/Shelter")}>
               🎀 보호소 페이지 바로가기{" "}
               <img src="../images/components/rightBtn.svg" />
             </D.BtnBox>
