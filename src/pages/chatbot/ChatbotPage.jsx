@@ -57,7 +57,7 @@ export default function ChatbotPage() {
         <C.InputArea>
           <C.ChatInput placeholder="무엇이든 물어보세요." />
           <C.SearchIcon>
-            <img src={search} style={{ width: "20px", height: "20px" }} />
+            <img src={search} style={{ width: "20px", heigth: "25px" }} />
           </C.SearchIcon>
         </C.InputArea>
 

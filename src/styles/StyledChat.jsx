@@ -112,7 +112,7 @@ export const FaqCard = styled.div`
   padding: 14px;
   background: rgba(255, 248, 207, 0.9);
   box-shadow: 1px 2px 7.8px 1px rgba(0, 0, 0, 0.25);
-
+  z-index: 10;
   color: #000;
   font-family: Poppins;
   font-size: 10px;
@@ -135,7 +135,7 @@ export const AiCard = styled.div`
   padding: 14px;
   background: rgba(255, 248, 207, 0.9);
   box-shadow: 1px 2px 7.8px 1px rgba(0, 0, 0, 0.25);
-
+  z-index: 10;
   color: #000;
   font-family: Poppins;
   font-size: 10px;
@@ -146,19 +146,19 @@ export const AiCard = styled.div`
 
 export const Button = styled.button`
   display: flex;
-  width: 83px;
+  width: 80px;
   height: 21px;
-  padding: 8px 2px;
+  padding: 8px 10px;
   margin-top: 5px;
   margin-bottom: 5px;
   justify-content: center;
   align-items: center;
-  gap: 9px;
   flex-shrink: 0;
   border-radius: 100px;
-  border: 1px solid #fbe5e9;
+  box-shadow: 0 0 0 1px #fbe5e9;
   background: #fff;
 
+  z-index: 10;
   color: #000;
   text-align: center;
   font-family: Pretendard;
@@ -166,6 +166,10 @@ export const Button = styled.button`
   font-style: normal;
 
   align-self: flex-end;
+
+  &:hover {
+    background-color: #ffdde3ff;
+  }
 `;
 // --- 하단 고정 입력창 ---
 
@@ -188,14 +192,14 @@ export const ChatInput = styled.input`
   width: 278px;
   height: 48px;
   border-radius: 80px;
-  border: 0.2px solid #f0b2c0;
+  border: none;
+
+  box-shadow: 0 0 0 1px #f0b2c0;
   background-color: transparent;
 
-  padding: 8px 4px 8px 24px;
+  padding-left: 23px;
   align-items: center;
   flex-shrink: 0;
-
-  color: #000;
   font-family: Inter;
   font-size: 12px;
   font-style: normal;
@@ -207,27 +211,28 @@ export const ChatInput = styled.input`
   }
   &:focus {
     outline: none;
-    border-color: #ff8080;
   }
 `;
 
 export const MicInput = styled.button`
   width: 48px;
   height: 48px;
+  border: none;
   flex-shrink: 0;
   border-radius: 50%;
-  border: 0.5px solid #f0b2c0;
+  box-shadow: 0 0 0 1px #f0b2c0;
   background: transparent;
   cursor: pointer;
 
   /* 이미지 정렬 */
   display: flex;
-  align-items: center;
+
   justify-content: center;
 
   /* 이미지(자식)에 padding을 주기 위해 padding을 버튼으로 이동 */
   padding: 12px;
   box-sizing: border-box;
+  outline: none;
 `;
 
 export const SearchIcon = styled.button`
@@ -237,7 +242,7 @@ export const SearchIcon = styled.button`
   right: 10px;
   top: 13px;
   background: transparent;
-
+  border: none;
   /* 이미지 정렬 */
   display: flex;
   align-items: center;
