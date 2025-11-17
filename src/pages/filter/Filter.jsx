@@ -4,6 +4,10 @@ import Select from "react-select";
 import Checkbox from "@mui/material/Checkbox";
 import { useNavigate } from "react-router-dom";
 
+// import axios from "axios";
+
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const regionData = {
   Seoul: ["강남구", "마포구", "서초구"],
   Suwon: ["장안구", "팔달구", "영통구"],
@@ -95,6 +99,40 @@ const Filter = () => {
         ...selected,
       },
     });
+
+    //    navigate("/SearchPage", {
+    //   state: {
+    //     startDate: startDate.replace(/-/g, ""), // yyyy-MM-dd → yyyyMMdd
+    //     endDate: endDate.replace(/-/g, ""),
+
+    //     province: selected.area?.label || null,
+    //     city: selected.city?.label || null,
+
+    //     animalType:
+    //       selected.type?.value === "dog"
+    //         ? "DOG"
+    //         : selected.type?.value === "cat"
+    //         ? "CAT"
+    //         : null,
+
+    //     sex:
+    //       selected.sex?.label === "암컷"
+    //         ? "FEMALE"
+    //         : selected.sex?.label === "수컷"
+    //         ? "MALE"
+    //         : "UNKNOWN",
+
+    //     neuterStatus:
+    //       selected.neuter?.label === "중성화"
+    //         ? "YES"
+    //         : selected.neuter?.label === "중성화 안 함"
+    //         ? "NO"
+    //         : "UNKNOWN",
+
+    //     onlyProtecting: checked,
+    //     isLatest: true,
+    //   },
+    // });
   };
 
   return (
@@ -109,13 +147,13 @@ const Filter = () => {
           <F.Filter>
             <F.Subtitle>기간 설정</F.Subtitle>
             <F.PeriodBox>
-              <input
+              <F.DateInput
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
               />
               <span>~</span>
-              <input
+              <F.DateInput
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
@@ -128,12 +166,14 @@ const Filter = () => {
             <F.Subtitle>지역 설정</F.Subtitle>
             <F.SelectWrap>
               <F.StyledSelect
+                classNamePrefix="react-select"
                 options={filterConfig.area.filter((op) => op.value !== "all")}
                 placeholder="시/도"
                 onChange={handleAreaChange}
               />
 
               <F.StyledSelect
+                classNamePrefix="react-select"
                 placeholder="시/군/구"
                 isDisabled={!selected.area || selected.area.value === "all"}
                 options={cities.map((c) => ({ value: c, label: c }))}
@@ -148,6 +188,7 @@ const Filter = () => {
             <F.Filter key={filter.key}>
               <F.Subtitle>{filter.title}</F.Subtitle>
               <F.StyledSelect
+                classNamePrefix="react-select"
                 options={filterConfig[filter.key]}
                 defaultValue={filterConfig[filter.key][0]}
                 onChange={(v) =>

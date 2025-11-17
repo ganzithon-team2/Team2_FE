@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import * as D from "../../styles/StyledDetail";
 import { mock } from "../main/Component/mockData";
 import { useNavigate } from "react-router-dom";
+import { saveFavorite } from "../../utils/favorites";
+import { removeFavorite } from "../../utils/favorites";
 
 const Detail = () => {
   const { desertionNo } = useParams();
@@ -36,9 +38,40 @@ const Detail = () => {
   const [openHealth, setOpenHealth] = useState(false);
   const [openMemo, setOpenMemo] = useState(false);
 
+  // 찜하기
+  const [isLiked, setIsLiked] = useState(false);
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("favoriteAnimals")) || [];
+    const exists = saved.some((v) => v.desertionNo === item.desertionNo);
+    setIsLiked(exists);
+  }, [item.desertionNo]);
+
   return (
     <D.Container bg={item.images}>
       <D.Box>
+        <D.Header>
+          <D.BackBtn
+            src="/images/components/Backbtn.svg"
+            alt="BackBtn"
+            onClick={() => navigate(-1)}
+          />
+          <D.LikeBtn
+            src={
+              isLiked
+                ? "/images/components/likeBtnFill.svg" // 꽉 찬 하트
+                : "/images/components/LikeBtn.svg" // 빈 하트
+            }
+            alt="likeBtn"
+            onClick={() => {
+              if (isLiked) {
+                removeFavorite(item.desertionNo);
+              } else {
+                saveFavorite(item);
+              }
+              setIsLiked(!isLiked);
+            }}
+          />
+        </D.Header>
         {/* 이미지 */}
         <D.MainImg
           src={item.images}

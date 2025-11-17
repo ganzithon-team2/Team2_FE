@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-import SearchBar from "./SearchBar";
+import { saveFavorite } from "../utils/favorites";
 
 const Container = styled.div``;
 const Box = styled.div`
@@ -32,17 +32,27 @@ const FilterBtn = styled.img`
   cursor: pointer;
 `;
 
-const DetailSearch = styled.div`
+const DetailText = styled.div`
   color: #000;
   text-align: center;
   font-feature-settings: "liga" off, "clig" off;
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 18px */
   letter-spacing: 0.2px;
   margin-right: 45%;
+`;
+const Text = styled.div`
+  color: #000;
+  text-align: center;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  margin-right: 32%;
 `;
 
 const Header = ({ type }) => {
@@ -50,6 +60,10 @@ const Header = ({ type }) => {
   const location = useLocation();
 
   const isFilterPage = location.pathname.startsWith("/Filter");
+  const isAnimalPage = location.pathname.startsWith("/AnimalList");
+
+  const [isLiked, setIsLiked] = useState(false);
+
   return (
     <Container>
       <Box>
@@ -74,7 +88,17 @@ const Header = ({ type }) => {
           />
         )}
         {type === "back" && (
-          <LikeBtn src="../images/components/LikeBtn.svg" alt="LikeBtn" />
+          <LikeBtn
+            src={
+              isLiked
+                ? "/images/components/likeBtnFill.svg"
+                : "/images/components/LikeBtn.svg"
+            }
+            onClick={() => {
+              toggleLike();
+              handleLike();
+            }}
+          />
         )}
         {/* 헤더 isOnlyBack  필터헤더 버전 */}
         {type === "onlyBack" && (
@@ -84,7 +108,8 @@ const Header = ({ type }) => {
             onClick={() => navigate(-1)}
           />
         )}
-        {isFilterPage && <DetailSearch>상세페이지</DetailSearch>}
+        {isFilterPage && <DetailText>상세페이지</DetailText>}
+        {isAnimalPage && <Text>유기동물 리스트 조회</Text>}
       </Box>
     </Container>
   );

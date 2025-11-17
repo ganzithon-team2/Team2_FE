@@ -2,16 +2,41 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
+  // height: 100vh;
+  overflow-y: auto;
+  // padding-bottom: 200px;
+  /* Chrome, Safari, Edge */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* Optional: iOS smooth */
+  -webkit-overflow-scrolling: touch;
 `;
 export const Box = styled.div`
+  width: 100%;
+  // height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-
-  overflow-y: auto;
 `;
+//헤더 별도선언
+export const Header = styled.div`
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  margin-top: 20px;
+`;
+export const BackBtn = styled.img``;
+export const LikeBtn = styled.img``;
 // 이미지 보여주기
 export const MainImg = styled.img`
   object-fit: cover;
@@ -66,12 +91,11 @@ export const DesertionNo = styled.div`
 `;
 export const DetailInfo = styled.div`
   color: #8c8098;
-  //   text-align: center;
+
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  //   line-height: 0%; /* 0 */
 `;
 export const Mark = styled.div`
   color: #200e32;
@@ -106,7 +130,7 @@ export const BoxInfo = styled.div`
   color: #200e32;
   text-align: center;
   font-family: Pretendard;
-  font-size: 15px;
+  font-size: clamp(12px, 3.5vw, 15px);
   font-style: normal;
   font-weight: 500;
   line-height: 0%; /* 0 */
@@ -142,18 +166,9 @@ export const BtnBox = styled.div`
     open ? "0 2px 20px 0 rgba(0, 0, 0, 0.25)" : "none"};
 `;
 
-// 건강 정보 상태
-export const HealthInfo = styled.div``;
-
-// 성격 메모
-export const personality = styled.div``;
-
-//보호소 페이지 바로가기
-export const GotoPage = styled.div``;
-
 //슬라이드 박스
 export const SlideWrap = styled.div`
-  background: ${({ open }) => (open ? "#fff" : "transparent")};
+  // background: ${({ open }) => (open ? "#fff" : "transparent")};
   width: 100%;
   display: flex;
   flex-direction: column;

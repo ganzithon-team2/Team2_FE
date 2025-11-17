@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import Select from "react-select";
 
+export const Container = styled.div``;
+export const Box = styled.div``;
+
 // Select 디자인
 export const StyledSelect = styled(Select)`
   width: 100%;
@@ -33,15 +36,19 @@ export const SelectWrap = styled.div`
   display: flex;
   gap: 10px;
 `;
-export const Container = styled.div``;
-export const Box = styled.div``;
+
 // 검색조건 설정
-export const Toptitle = styled.div``;
+export const Toptitle = styled.div`
+  border-bottom: 1px solid #ff8ea7;
+  padding-bottom: 0.7vh;
+  padding-left: 30px;
+  margin-bottom: 15px;
+`;
 export const TopText = styled.div`
   color: #000;
   font-feature-settings: "liga" off, "clig" off;
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 18px */
@@ -67,16 +74,40 @@ export const Subtitle = styled.div`
   color: #000;
   font-feature-settings: "liga" off, "clig" off;
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 18px */
   letter-spacing: 0.2px;
 `;
+
 // 검색 드롭다운
 export const DetailBox = styled.div``;
 // 검색 기간 설정
-export const PeriodBox = styled.div``;
+export const PeriodBox = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+// 날짜 선택박스
+export const DateInput = styled.input`
+  color: #000;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 18px */
+  letter-spacing: 0.2px;
+  padding: 0 10px;
+
+  border: 1.5px solid #ffadc0;
+  font-size: 14px;
+  width: 45%;
+
+  &:focus {
+    outline: none;
+  }
+`;
 
 //보호중인 동물만 검색
 export const StatusFilter = styled.div`

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin-top: 10px;
+  // display: flex;
+  // grid-template-columns: repeat(2, 1fr);
+  // margin-top: 10px;
 `;
 export const Box = styled.div`
   margin: 0 auto;

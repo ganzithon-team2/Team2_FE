@@ -3,9 +3,48 @@ import * as S from "../../styles/StyledSearch";
 import BottomCard from "../main/Component/BottomCard";
 import { useLocation } from "react-router-dom";
 import { mock } from "../main/Component/mockData";
+// import axios from "axios";
+
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const SearchPage = () => {
   const { state } = useLocation();
+  // const [data, setData] = useState([]);
+  // const [totalPages, setTotalPages] = useState(0);
+
+  // // 페이징
+  // const [page, setPage] = useState(0);
+  // const size = 20;
+  // const fetchAnimals = async () => {
+  //     try {
+  //       const res = await axios.get(`${API_BASE_URL}/api/animals`, {
+  //         params: {
+  //           startDate: state.startDate || null,
+  //           endDate: state.endDate || null,
+  //           province: state.province || null,
+  //           city: state.city || null,
+  //           animalType: state.animalType || null,
+  //           sex: state.sex || null,
+  //           neuterStatus: state.neuterStatus || null,
+  //           onlyProtecting: state.onlyProtecting,
+  //           isLatest: state.isLatest,
+
+  //           page,
+  //           size,
+  //           sort: "foundDate,desc",
+  //         },
+  //       });
+
+  //       setData(res.data.data.content);
+  //       setTotalPages(res.data.data.totalPages);
+  //     } catch (e) {
+  //       console.log("검색 실패:", e);
+  //     }
+  //   };
+
+  //   useEffect(() => {
+  //     fetchAnimals();
+  //   }, [page]);
 
   const { startDate, endDate, checked, area, city, type, sex, neuter } =
     state || {};
@@ -76,7 +115,9 @@ const SearchPage = () => {
   return (
     <S.Container>
       <S.Box>
-        <BottomCard data={filteredData} />
+        {filteredData.map((item) => (
+          <BottomCard key={item.desertionNo} item={item} />
+        ))}
       </S.Box>
     </S.Container>
   );

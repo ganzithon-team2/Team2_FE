@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useOutletContext } from "react-router-dom";
+
 import Header from "./Header";
 import NavigationBar from "./NavigationBar";
 import loginBg from "/images/components/LoginBackground.png";
@@ -33,6 +34,7 @@ const Box = styled.div`
   flex-direction: column;
   cursor: default;
 
+  overflow-y: hidden;
   overflow-x: hidden;
 
   /* Chrome, Safari, Edge */
@@ -50,20 +52,24 @@ const bgMap = {
   "/": loginBg,
   "/WelcomePage": loginBg,
   "/MainPage": defaultBg,
-  "/detail": defaultBg, //변경필요
+  "/detail/*": defaultBg, //변경필요
   "/SavePage": defaultBg, //변경필요
   "/SearchPage": defaultBg, // 변경 필요
   "/ChatbotPage": chatbotBg, // 변경 필요
   "/Filter": defaultBg, // 변경 필요
   "/Shelter": defaultBg, // 변경 필요
+  "/AnimalList": defaultBg, // 변경 필요
 };
 
 const getBackgroundImage = (pathname) => {
-  return bgMap[pathname];
+  if (bgMap[pathname]) return bgMap[pathname];
+  if (pathname.startsWith("/detail")) return defaultBg;
+  return defaultBg;
 };
 
 const Layout = () => {
   const location = useLocation();
+  const outletContext = useOutletContext();
 
   const navPages = [
     "/MainPage",
@@ -71,20 +77,23 @@ const Layout = () => {
     "/SearchPage",
     "/ChatbotPage",
     "/Shelter",
+    "/AnimalList",
   ];
 
   const isShowNav = navPages.includes(location.pathname);
 
   const backBtnPages = ["/detail"];
 
-  const onlyBackPage = ["/Filter", "/Shelter", "/ChatbotPage"];
+  const onlyBackPage = [
+    "/Filter",
+    "/Shelter",
+    "/ChatbotPage",
+    "/SavePage",
+    "/AnimalList",
+  ];
 
   const isAuthPage =
     location.pathname === "/" || location.pathname === "/WelcomePage";
-
-  // const isBackPage = backBtnPages.some((path) =>
-  //   location.pathname.startsWith(path)
-  // );
 
   let headerType = "logo";
 
@@ -98,7 +107,9 @@ const Layout = () => {
   return (
     <Container>
       <Box $backgroundImage={backgroundImage}>
-        {!isAuthPage && <Header type={headerType} />}
+        {!isAuthPage && !location.pathname.startsWith("/detail") && (
+          <Header type={headerType} />
+        )}
         <Outlet />
         {isShowNav && <NavigationBar />}
       </Box>

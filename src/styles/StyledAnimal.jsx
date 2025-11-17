@@ -1,14 +1,32 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  /* Chrome, Safari, Edge */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
-export const Box = styled.div``;
+  /* Firefox */
+  scrollbar-width: none;
 
+  /* Optional: iOS smooth */
+  -webkit-overflow-scrolling: touch;
+`;
+export const Box = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 13vh;
+`;
 export const TapBar = styled.div`
   display: flex;
   gap: 16px;
   padding: 5px 24px;
-  border-bottom: 1px solid #f0b2c0;
+  // border-bottom: 1px solid #f0b2c0;
   position: relative;
 `;
 
@@ -40,26 +58,4 @@ export const TapName = styled.div`
   &:hover::after {
     // background: #ff5e82;
   }
-`;
-
-export const BottomBox = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin-top: 10px;
-
-  height: 400px;
-  padding-bottom: 20%;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-
-  /* Chrome, Safari, Edge */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Firefox */
-  scrollbar-width: none;
-
-  /* Optional: iOS smooth */
-  -webkit-overflow-scrolling: touch;
 `;

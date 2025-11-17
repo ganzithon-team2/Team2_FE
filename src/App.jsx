@@ -12,6 +12,7 @@ import OidcCallback from "./pages/auth/OidcCallback";
 
 import Filter from "./pages/filter/Filter";
 import Shelter from "./pages/detail/Shelter";
+import AnimalList from "./pages/save/AnimalList";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/detail/:desertionNo" element={<Detail />} />
           <Route path="/Filter" element={<Filter />} />
           <Route path="/Shelter" element={<Shelter />} />
+          <Route path="/AnimalList" element={<AnimalList />} />
         </Route>
       </Routes>
     </BrowserRouter>

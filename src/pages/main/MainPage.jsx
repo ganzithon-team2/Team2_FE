@@ -6,7 +6,7 @@ import BottomCard from "./Component/BottomCard";
 import { useNavigate } from "react-router-dom";
 import { mock } from "./Component/mockData.js";
 
-const MainPage = ({ data }) => {
+const MainPage = ({ item }) => {
   const [selectedTab, setSelectedTab] = useState("all");
   const navigate = useNavigate();
   // // API연결
@@ -60,7 +60,9 @@ const MainPage = ({ data }) => {
         </M.TapBar>
         {/* 무한스크롤 카드 */}
         <M.BottomBox>
-          <BottomCard data={filterData} />
+          {filterData.map((item) => (
+            <BottomCard key={item.desertionNo} item={item} />
+          ))}
         </M.BottomBox>
       </M.Box>
     </M.Container>
