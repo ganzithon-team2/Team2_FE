@@ -195,6 +195,7 @@ export const ChatInput = styled.input`
   border: none;
 
   box-shadow: 0 0 0 1px #f0b2c0;
+
   background-color: transparent;
 
   padding-left: 23px;
@@ -223,6 +224,7 @@ export const MicInput = styled.button`
   box-shadow: 0 0 0 1px #f0b2c0;
   background: transparent;
   cursor: pointer;
+  outline: none;
 
   /* 이미지 정렬 */
   display: flex;
@@ -233,6 +235,10 @@ export const MicInput = styled.button`
   padding: 12px;
   box-sizing: border-box;
   outline: none;
+
+  &:active {
+    outline: none;
+  }
 `;
 
 export const SearchIcon = styled.button`
@@ -247,4 +253,75 @@ export const SearchIcon = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+// --- 채팅 메시지 리스트 ---
+export const MessageList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding-bottom: 30px; /* 하단 입력창 높이만큼 여백 */
+`;
+
+export const SenderName = styled.div`
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+
+  ${(props) =>
+    props.$isMine
+      ? `
+      align-self: flex-end; /* (ME) 오른쪽 정렬 */
+    `
+      : `
+      align-self: flex-start; /* (BOT) 왼쪽 정렬 */
+    `}
+`;
+
+export const SparkleIcon = styled.img`
+  width: 24px; /* 스크린샷에 맞게 크기 조절 */
+  height: 24px;
+  flex-shrink: 0;
+  margin-right: 8px; /* 아이콘과 텍스트 사이 간격 */
+  /* 필요시 align-self: flex-start; 추가 */
+`;
+
+export const MessageText = styled.div`
+  word-break: break-word; /* 텍스트가 길어지면 줄바꿈 */
+`;
+
+// 채팅 말풍선
+export const MessageBubble = styled.div`
+  display: flex;
+  width: fit-content;
+  max-width: 90%;
+  padding: 10px 14px;
+  line-height: 1.5;
+
+  /* 내 말풍선 (ME) */
+  ${(props) =>
+    props.$isMine
+      ? `
+      align-self: flex-end;
+      border-radius: 8px;
+      border: 1px solid #F0B2C0;
+      background: rgba(255, 255, 255, 0.50);
+    `
+      : /* 봇 말풍선 (보니) */
+        `
+      align-self: flex-start;
+      border-radius: 8px;
+      border: 1px solid #F0B2C0;
+      background: rgba(255, 255, 255, 0.50);
+    `}
+
+  color: #160211;
+  font-family: Pretendard;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 400;
+
+  word-break: break-word;
 `;
