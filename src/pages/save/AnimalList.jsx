@@ -4,7 +4,7 @@ import * as A from "../../styles/StyledAnimal";
 import BottomCard from "../main/Component/BottomCard";
 import { mock } from "../main/Component/mockData";
 
-const AnimalList = () => {
+const AnimalList = ({ item }) => {
   const [selectedTab, setSelectedTab] = useState("all");
   const tabList = [
     { key: "all", label: "전체" },
@@ -37,7 +37,11 @@ const AnimalList = () => {
             );
           })}
         </A.TapBar>
-        <BottomCard data={filterData} />
+        <A.Bottom>
+          {filterData.map((animal) => (
+            <BottomCard key={animal.desertionNo} item={animal} />
+          ))}
+        </A.Bottom>
       </A.Box>
     </A.Container>
   );

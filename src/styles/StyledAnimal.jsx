@@ -59,3 +59,9 @@ export const TapName = styled.div`
     // background: #ff5e82;
   }
 `;
+
+export const Bottom = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0 10px;
+`;

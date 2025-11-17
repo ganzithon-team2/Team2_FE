@@ -54,20 +54,28 @@ const Text = styled.div`
   font-weight: 400;
   margin-right: 32%;
 `;
-
+const SaveText = styled.div`
+  color: #000;
+  text-align: center;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  margin-right: 40%;
+`;
 const Header = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const isFilterPage = location.pathname.startsWith("/Filter");
   const isAnimalPage = location.pathname.startsWith("/AnimalList");
-
-  const [isLiked, setIsLiked] = useState(false);
+  const isSavePage = location.pathname.startsWith("/SavePage");
 
   return (
     <Container>
       <Box>
-        {/* 헤어 로고버전 */}
+        {/* 헤더 로고버전 */}
         {type === "logo" && (
           <Logo src="../images/components/logo.svg" alt="logo" />
         )}
@@ -79,27 +87,7 @@ const Header = ({ type }) => {
             onClick={() => navigate("/Filter")}
           />
         )}
-        {/* 헤더 back 버전 */}
-        {type === "back" && (
-          <BackBtn
-            src="../images/components/Backbtn.svg"
-            alt="Backbtn"
-            onClick={() => navigate(-1)}
-          />
-        )}
-        {type === "back" && (
-          <LikeBtn
-            src={
-              isLiked
-                ? "/images/components/likeBtnFill.svg"
-                : "/images/components/LikeBtn.svg"
-            }
-            onClick={() => {
-              toggleLike();
-              handleLike();
-            }}
-          />
-        )}
+
         {/* 헤더 isOnlyBack  필터헤더 버전 */}
         {type === "onlyBack" && (
           <BackBtn
@@ -110,6 +98,7 @@ const Header = ({ type }) => {
         )}
         {isFilterPage && <DetailText>상세페이지</DetailText>}
         {isAnimalPage && <Text>유기동물 리스트 조회</Text>}
+        {isSavePage && <SaveText>저장 목록</SaveText>}
       </Box>
     </Container>
   );
