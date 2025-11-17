@@ -50,10 +50,12 @@ const bgMap = {
   "/": loginBg,
   "/WelcomePage": loginBg,
   "/MainPage": defaultBg,
-  "/Detail": defaultBg, //변경필요
+  "/detail": defaultBg, //변경필요
   "/SavePage": defaultBg, //변경필요
   "/SearchPage": defaultBg, // 변경 필요
   "/ChatbotPage": chatbotBg, // 변경 필요
+  "/Filter": defaultBg, // 변경 필요
+  "/Shelter": defaultBg, // 변경 필요
 };
 
 const getBackgroundImage = (pathname) => {

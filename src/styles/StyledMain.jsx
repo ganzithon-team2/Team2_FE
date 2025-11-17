@@ -14,7 +14,7 @@ export const TapBar = styled.div`
 
 export const TapName = styled.div`
   cursor: pointer;
-  color: ${({ active }) => (active ? "#868da6" : "#b7c0d2")};
+  color: ${({ $active }) => ($active ? "#868da6" : "#b7c0d2")};
   font-family: Pretendard;
   font-size: 16px;
   font-weight: 500;
@@ -28,7 +28,7 @@ export const TapName = styled.div`
     bottom: -6px;
     width: 100%;
     height: 3px;
-    background: ${({ active }) => (active ? "#FF5E82" : "transparent")};
+    background: ${({ $active }) => ($active ? "#FF5E82" : "transparent")};
     transition: all 0.2s ease;
     border-radius: 80px;
   }
