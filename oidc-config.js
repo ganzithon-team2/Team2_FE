@@ -1,14 +1,16 @@
 import { UserManager, WebStorageStateStore } from "oidc-client-ts";
 
 const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
-const REDIRECT_URI = "http://localhost:5173/oidc-callback";
+
+const REDIRECT_URI = `${window.location.origin}/oidc-callback`;
+const POST_LOGOUT_URI = `${window.location.origin}/`;
 
 export const userManager = new UserManager({
   authority: "https://kauth.kakao.com",
 
   client_id: REST_API_KEY,
   redirect_uri: REDIRECT_URI,
-  post_logout_redirect_uri: "http://localhost:5173/",
+  post_logout_redirect_uri: POST_LOGOUT_URI,
 
   response_type: "code",
   scope: "openid",

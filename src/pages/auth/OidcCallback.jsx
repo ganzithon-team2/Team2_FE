@@ -3,9 +3,10 @@ import { userManager } from "../../../oidc-config";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function OidcCallback() {
   const navigate = useNavigate();
-
   const isProcessing = useRef(false);
 
   useEffect(() => {
@@ -15,15 +16,12 @@ export default function OidcCallback() {
     userManager
       .signinRedirectCallback()
       .then(async (user) => {
-        console.log("Token received from Kakao:", user);
-
         const idToken = user.id_token;
 
         try {
-          console.log("Sending idToken in HEADER:", idToken);
-
+          // 2. 하드코딩된 주소 대신 환경 변수를 사용합니다.
           const res = await axios.post(
-            "http://localhost:8080/api/auth/login",
+            `${API_BASE_URL}/api/auth/login`,
             null,
             {
               headers: {
