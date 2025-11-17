@@ -109,7 +109,19 @@ const Detail = () => {
             </D.SlideWrap>
 
             {/* 보호소 페이지 바로가기 */}
-            <D.BtnBox onClick={() => navigate("/Shelter")}>
+            <D.BtnBox
+              onClick={() =>
+                navigate("/Shelter", {
+                  state: {
+                    shelterName: item.shelterName,
+                    shelterTel: item.shelterTel,
+                    shelterAddress: item.shelterAddress.split("(")[0],
+                    province: item.province,
+                    city: item.city,
+                  },
+                })
+              }
+            >
               🎀 보호소 페이지 바로가기{" "}
               <img src="../images/components/rightBtn.svg" />
             </D.BtnBox>

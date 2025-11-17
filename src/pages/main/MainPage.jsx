@@ -1,5 +1,5 @@
 // 메인 페이지
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as M from "../../styles/StyledMain";
 import TopCardList from "./Component/TopCardList";
 import BottomCard from "./Component/BottomCard";
@@ -9,15 +9,21 @@ import { mock } from "./Component/mockData.js";
 const MainPage = ({ data }) => {
   const [selectedTab, setSelectedTab] = useState("all");
   const navigate = useNavigate();
+  // // API연결
+  // const [animalList, setAnimalList] = useState([]);
 
-  //상세페이지 이동
-  const goToDetail = () => {
-    navigate(`/detail/${data.desertionNo}`);
-  };
-
-  const goToSearch = () => {
-    navigate("/SearchPage");
-  };
+  // useEffect(() => {
+  //   const fetchAnimals = async () => {
+  //     try {
+  //       const res = await fetch("https://ganzi.duckdns.org/api/animals");
+  //       const json = await res.json();
+  //       setAnimalList(json.data);
+  //     } catch (e) {
+  //       console.log("API 불러오기 실패 : ", e);
+  //     }
+  //   };
+  //   fetchAnimals();
+  // }, []);
 
   const tabList = [
     { key: "all", label: "전체" },
@@ -44,7 +50,7 @@ const MainPage = ({ data }) => {
             return (
               <M.TapName
                 key={tab.key}
-                active={selectedTab === tab.key}
+                $active={selectedTab === tab.key}
                 onClick={() => setSelectedTab(tab.key)}
               >
                 {tab.label}
