@@ -15,9 +15,15 @@ export const Container = styled.div`
 export const ContentArea = styled.div`
   padding: 50px;
   flex: 1;
+  overflow-y: auto;
+  padding-bottom: 0px;
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const IntroWrapper = styled.div`
