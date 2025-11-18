@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import * as C from "../../styles/StyledChat";
-import pinkCircle from "/images/chatbot/pink-circle.png";
 import chatbotCharacter from "/images/chatbot/boni-character.png";
 import search from "/images/chatbot/search.png";
 import mic from "/images/chatbot/mic.png";
@@ -61,11 +60,10 @@ export default function ChatbotPage() {
             ))}
           </C.MessageList>
         ) : (
-          <>
+          <C.IntroWrapper>
             <C.GreetingText>안녕하세요, {nickname}님</C.GreetingText>
 
             <C.ImageOverlapContainer>
-              <C.PinkCircleImage src={pinkCircle} alt="핑크색 원 배경" />
               <C.CharacterImage src={chatbotCharacter} alt="챗봇 캐릭터 보니" />
             </C.ImageOverlapContainer>
             <C.CtaText>
@@ -97,7 +95,7 @@ export default function ChatbotPage() {
                 </C.AiCard>
               </C.Section>
             </C.SectionWrapper>
-          </>
+          </C.IntroWrapper>
         )}
       </C.ContentArea>
 
