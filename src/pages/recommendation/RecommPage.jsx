@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
 import * as R from "../../styles/StyledRecommend";
 import { useLocation, useNavigate } from "react-router-dom";
-import BottomCard from "../main/Component/BottomCard";
-import { getFavorites } from "../../utils/favorites";
 
 const RecommPage = () => {
   const [list, setList] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
-
-  useEffect(() => {
-    setList(getFavorites());
-  }, [location]);
 
   return (
     <R.Container>

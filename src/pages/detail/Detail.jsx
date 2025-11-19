@@ -53,6 +53,40 @@ const Detail = () => {
     fetchDetail();
   }, [desertionNo]);
 
+  // interest(체류 시간)기록 추가, 테스트 목적
+  useEffect(()=> {
+    const sendInterest = async () => {
+      try {
+        await API.post("/api/animals/interests", {
+          desertionNo: data.desertionNo,
+          dwellTimeSeconds: 0, // 백엔드가 일단은 0으로 전달하라 했음
+        });
+        console.log("관심 로그 전송 완료");
+      } catch (err) {
+        console.error("관심 로그 전송 실패:", err);
+      }
+    };
+    sendInterest();
+  }, [data?.desertionNo]);
+
+  // 실제 체류를 기록하는 함수
+//   useEffect(() => {
+//   if (!data) return;
+
+//   const start = Date.now();
+
+//   return () => {
+//     const dwellTimeSeconds = Math.round((Date.now() - start) / 1000);
+
+//     API.post("/api/animals/interests", {
+//       desertionNo: data.desertionNo,
+//       dwellTimeSeconds,
+//     }).catch((err) => {
+//       console.error("관심 로그 전송 실패:", err);
+//     });
+//   };
+// }, [data?.desertionNo]);
+
   // 북마크 기능
   useEffect(() => {
     const fetchUserLike = async () => {
