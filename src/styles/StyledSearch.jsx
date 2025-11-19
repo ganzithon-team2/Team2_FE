@@ -22,4 +22,5 @@ export const Box = styled.div`
 
   /* Optional: iOS smooth */
   -webkit-overflow-scrolling: touch;
+  padding-top: 20px;
 `;

@@ -20,8 +20,6 @@ function App() {
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
-        <Route path="/oidc-callback" element={<OidcCallback />} />
-
         <Route element={<Layout />}>
           <Route path="/" element={<AuthPage />} />
           <Route path="/WelcomePage" element={<WelcomePage />} />
@@ -36,6 +34,7 @@ function App() {
           <Route path="/Filter" element={<Filter />} />
           <Route path="/Shelter" element={<Shelter />} />
           <Route path="/AnimalList" element={<AnimalList />} />
+          <Route path="/oidc-callback" element={<OidcCallback />} />
         </Route>
       </Routes>
     </BrowserRouter>

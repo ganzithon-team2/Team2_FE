@@ -1,15 +1,16 @@
 // 찜 페이지 (북마크)
 import React, { useEffect, useState } from "react";
 import * as S from "../../styles/StyledSave";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BottomCard from "../main/Component/BottomCard";
 // import { getFavorites } from "../../utils/favorites";
 import API from "../../api/axiosInstance";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const SavePage = () => {
   const [list, setList] = useState([]);
   const navigate = useNavigate();
-  // const location = useLocation();
+  const [loading, setLoading] = useState(true);
   const userId = localStorage.getItem("userId");
   useEffect(() => {
     if (!userId) return;
@@ -29,11 +30,15 @@ const SavePage = () => {
         setList(results.map((r) => r.data.data));
       } catch (e) {
         console.error(e);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetch();
   }, [userId]);
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <S.Container>

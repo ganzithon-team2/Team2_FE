@@ -5,6 +5,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 export const TopBox = styled.div`
   display: flex;
   justify-content: space-between;
@@ -17,14 +18,14 @@ export const Box = styled.div`
   width: 150%;
   height: 121px;
   aspect-ratio: 16 / 7; /* 16:10 비율 유지 */
-  // object-fit: cover;
-  // background: #fff8cf65;
   border: 1.5px solid #f86f8e;
   border-radius: 30px;
   display: flex;
   padding: 13px 10px;
   flex-direction: column;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  margin-top: 10px;
+  margin-bottom: 15px;
 `;
 
 export const Img = styled.img`

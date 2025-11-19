@@ -59,6 +59,7 @@ const bgMap = {
   "/Filter": defaultBg, // 변경 필요
   "/Shelter": defaultBg, // 변경 필요
   "/AnimalList": defaultBg, // 변경 필요
+  "/oidc-callback": defaultBg, // 변경 필요
 };
 
 const getBackgroundImage = (pathname) => {
@@ -69,7 +70,6 @@ const getBackgroundImage = (pathname) => {
 
 const Layout = () => {
   const location = useLocation();
-  const outletContext = useOutletContext();
 
   const navPages = [
     "/MainPage",
@@ -90,6 +90,7 @@ const Layout = () => {
     "/Shelter",
     "/ChatbotPage",
     "/SavePage",
+    "/SearchPage",
     "/AnimalList",
     "/RecommPage",
     "/AIRecommList",

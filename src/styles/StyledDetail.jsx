@@ -195,7 +195,8 @@ export const SlideWrap = styled.div`
 export const SlideBox = styled.div`
   width: 350px;
   max-height: ${({ open }) => (open ? "500px" : "0")};
-  margin-left: 20px;
+
+  margin: 0 auto;
 
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.9);
@@ -219,4 +220,16 @@ export const Text = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 160%; /* 24px */
+`;
+
+export const LoadingWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 `;
