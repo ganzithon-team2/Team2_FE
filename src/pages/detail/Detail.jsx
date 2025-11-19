@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import * as D from "../../styles/StyledDetail";
-
+import LoadingSpinner from "../../components/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -41,13 +41,20 @@ const Detail = () => {
   //  api연결
   useEffect(() => {
     const fetchDetail = async () => {
+      const startTime = Date.now();
       try {
         const res = await API.get(`/api/animals/${desertionNo}`);
-        setData(res.data.data); // data 안으로 접근
+        setData(res.data.data);
       } catch (err) {
         console.error("Detail API Error:", err);
       } finally {
-        setLoading(false);
+        const elapsed = Date.now() - startTime; // 실제 요청 걸린 시간
+        const minTime = 400; // 최소 유지 시간 2초
+        const delay = Math.max(0, minTime - elapsed);
+
+        setTimeout(() => {
+          setLoading(false); // 2초 유지 후 로딩 끝!
+        }, delay);
       }
     };
     fetchDetail();
@@ -60,7 +67,7 @@ const Detail = () => {
 
       try {
         const res = await API.get(`/api/admin/user-likes/${userId}`);
-        const likedList = res.data.data; // ["12345", "77777", ...] 구조번호 배열
+        const likedList = res.data.data;
 
         setIsLiked(likedList.includes(String(desertionNo)));
       } catch (err) {
@@ -71,147 +78,162 @@ const Detail = () => {
     fetchUserLike();
   }, [userId, desertionNo]);
 
-  if (loading) return <div>로딩중</div>;
-  if (!data) return <div>데이터가 없음</div>;
-
   return (
-    <D.Container $bg={data.images}>
-      <D.Box>
-        <D.Header>
-          <D.BackBtn
-            src="/images/components/Backbtn.svg"
-            alt="BackBtn"
-            onClick={() => navigate(-1)}
-          />
-          <D.LikeBtn
-            src={
-              isLiked
-                ? "/images/components/likeBtnFill.svg" // 꽉 찬 하트
-                : "/images/components/LikeBtn.svg" // 빈 하트
-            }
-            alt="likeBtn"
-            onClick={async () => {
-              try {
-                const res = await API.post(`/api/admin/user-likes/${userId}`, {
-                  desertionNo: data.desertionNo,
-                  liked: !isLiked, // true → 북마크 / false → 취소
-                });
-
-                setIsLiked(!isLiked); // FE 표시 업데이트
-              } catch (err) {
-                console.error("POST Like Error:", err);
+    <D.Container $bg={data?.images}>
+      {loading ? (
+        <D.LoadingWrapper>
+          <LoadingSpinner />
+        </D.LoadingWrapper>
+      ) : !data ? (
+        <div>데이터 없음</div>
+      ) : (
+        <D.Box>
+          <D.Header>
+            <D.BackBtn
+              src="/images/components/Backbtn.svg"
+              alt="BackBtn"
+              onClick={() => navigate(-1)}
+            />
+            <D.LikeBtn
+              src={
+                isLiked
+                  ? "/images/components/likeBtnFill.svg" // 꽉 찬 하트
+                  : "/images/components/LikeBtn.svg" // 빈 하트
               }
-            }}
-          />
-        </D.Header>
-        {/* 이미지 */}
+              alt="likeBtn"
+              onClick={async () => {
+                try {
+                  const res = await API.post(
+                    `/api/admin/user-likes/${userId}`,
+                    {
+                      desertionNo: data.desertionNo,
+                      liked: !isLiked, // true → 북마크 / false → 취소
+                    }
+                  );
 
-        {images.length === 1 ? (
-          <D.MainImg
-            src={images[0]}
-            alt={data.breedName}
-            onClick={() => setIsOpen(true)}
-          />
-        ) : (
-          <Swiper
-            spaceBetween={10}
-            slidesPerView={1}
-            style={{ width: "100%", borderRadius: "10px" }}
-          >
-            {images.map((img, i) => (
-              <SwiperSlide key={i}>
-                <D.MainImg src={img} onClick={() => setIsOpen(true)} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        )}
-        {/* 모달창 */}
-        {isOpen && (
-          <D.ModalOverlay onClick={() => setIsOpen(false)}>
-            <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+                  setIsLiked(!isLiked); // FE 표시 업데이트
+                } catch (err) {
+                  console.error("POST Like Error:", err);
+                }
+              }}
+            />
+          </D.Header>
+          {/* 이미지 */}
+
+          {images.length === 1 ? (
+            <D.MainImg
+              src={images[0]}
+              alt={data.breedName}
+              onClick={() => setIsOpen(true)}
+            />
+          ) : (
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={1}
+              style={{ width: "100%", borderRadius: "10px" }}
+            >
               {images.map((img, i) => (
                 <SwiperSlide key={i}>
-                  <D.ModalImg src={img} />
+                  <D.MainImg src={img} onClick={() => setIsOpen(true)} />
                 </SwiperSlide>
               ))}
             </Swiper>
-          </D.ModalOverlay>
-        )}
-        {/* 기본정보 표시 */}
-        <D.DetailBox>
-          <D.BagicInfo>
-            <D.DesertionNo>보호번호 {data.desertionNo}</D.DesertionNo>
-            <D.DetailInfo>
-              {data.age} {data.weight} {data.foundDate} {data.shelterName}
-            </D.DetailInfo>
-            <D.Mark>{data.specialMark}</D.Mark>
-            <D.CheckList>
-              <D.BoxInfo>
-                {data.animalTypeName === "개" ? "🐕" : "🐈"} {data.breedName}
-              </D.BoxInfo>
-              <D.BoxInfo>🌿 {data.neuterStatus}</D.BoxInfo>
-              <D.BoxInfo>🛡️ {data.status}</D.BoxInfo> {/* 보호중 상태 표시?*/}
-            </D.CheckList>
-          </D.BagicInfo>
+          )}
+          {/* 모달창 */}
+          {isOpen && (
+            <D.ModalOverlay onClick={() => setIsOpen(false)}>
+              <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+                {images.map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <D.ModalImg src={img} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </D.ModalOverlay>
+          )}
+          {/* 기본정보 표시 */}
+          <D.DetailBox>
+            <D.BagicInfo>
+              <D.DesertionNo>보호번호 {data.desertionNo}</D.DesertionNo>
+              <D.DetailInfo>
+                {data.age} {data.weight} {data.foundDate} {data.shelterName}
+              </D.DetailInfo>
+              <D.Mark>{data.specialMark}</D.Mark>
+              <D.CheckList>
+                <D.BoxInfo>
+                  {data.animalTypeName === "개" ? "🐕" : "🐈"} {data.breedName}
+                </D.BoxInfo>
+                <D.BoxInfo>🌿 {data.neuterStatus}</D.BoxInfo>
+                <D.BoxInfo>🛡️ {data.status}</D.BoxInfo> {/* 보호중 상태 표시?*/}
+              </D.CheckList>
+            </D.BagicInfo>
 
-          <D.BtnWrapper>
-            {/* 건강 정보 상태 */}
-            <D.SlideWrap open={openHealth} type="health">
+            <D.BtnWrapper>
+              {/* 건강 정보 상태 */}
+              <D.SlideWrap open={openHealth} type="health">
+                <D.BtnBox
+                  open={openHealth}
+                  onClick={() => setOpenHealth(!openHealth)}
+                >
+                  💊 건강 정보 상태{" "}
+                  <img src="../images/components/rightBtn.svg" />
+                </D.BtnBox>
+                <D.SlideBox open={openHealth}>
+                  <D.Text>건강정보 : {data.healthInfo}</D.Text>
+                  <D.Text>백신접종 : {data.vaccination}</D.Text>
+                  <D.Text>질병여부 : {data.healthCheck}</D.Text> <br /> <br />{" "}
+                  <br />
+                  <D.Text>
+                    *자세한 내용은 보호소로 전화문의 부탁드립니다.
+                  </D.Text>
+                </D.SlideBox>
+              </D.SlideWrap>
+
+              {/* 성격 메모 */}
+
+              <D.SlideWrap open={openMemo} type="memo">
+                <D.BtnBox
+                  open={openMemo}
+                  onClick={() => setOpenMemo(!openMemo)}
+                >
+                  💕 성격 메모 <img src="../images/components/rightBtn.svg" />
+                </D.BtnBox>
+                <D.SlideBox open={openMemo}>
+                  {data.personality ? (
+                    <>
+                      <D.Text>{data.personality}</D.Text>
+                      <br />
+                      <br />
+                      <br />
+                    </>
+                  ) : null}
+                  <D.Text>
+                    *자세한 내용은 보호소로 전화문의 부탁드립니다.
+                  </D.Text>
+                </D.SlideBox>
+              </D.SlideWrap>
+
+              {/* 보호소 페이지 바로가기 */}
               <D.BtnBox
-                open={openHealth}
-                onClick={() => setOpenHealth(!openHealth)}
+                onClick={() =>
+                  navigate("/Shelter", {
+                    state: {
+                      shelterName: data.shelterName,
+                      shelterTel: data.shelterTel,
+                      shelterAddress: data.shelterAddress.split("(")[0],
+                      province: data.province,
+                      city: data.city,
+                    },
+                  })
+                }
               >
-                💊 건강 정보 상태{" "}
+                🎀 보호소 페이지 바로가기{" "}
                 <img src="../images/components/rightBtn.svg" />
               </D.BtnBox>
-              <D.SlideBox open={openHealth}>
-                <D.Text>건강정보 : {data.healthInfo}</D.Text>
-                <D.Text>백신접종 : {data.vaccination}</D.Text>
-                <D.Text>질병여부 : {data.healthCheck}</D.Text> <br /> <br />{" "}
-                <br />
-                <D.Text>*자세한 내용은 보호소로 전화문의 부탁드립니다.</D.Text>
-              </D.SlideBox>
-            </D.SlideWrap>
-
-            {/* 성격 메모 */}
-
-            <D.SlideWrap open={openMemo} type="memo">
-              <D.BtnBox open={openMemo} onClick={() => setOpenMemo(!openMemo)}>
-                💕 성격 메모 <img src="../images/components/rightBtn.svg" />
-              </D.BtnBox>
-              <D.SlideBox open={openMemo}>
-                {data.personality ? (
-                  <>
-                    <D.Text>{data.personality}</D.Text>
-                    <br />
-                    <br />
-                    <br />
-                  </>
-                ) : null}
-                <D.Text>*자세한 내용은 보호소로 전화문의 부탁드립니다.</D.Text>
-              </D.SlideBox>
-            </D.SlideWrap>
-
-            {/* 보호소 페이지 바로가기 */}
-            <D.BtnBox
-              onClick={() =>
-                navigate("/Shelter", {
-                  state: {
-                    shelterName: data.shelterName,
-                    shelterTel: data.shelterTel,
-                    shelterAddress: data.shelterAddress.split("(")[0],
-                    province: data.province,
-                    city: data.city,
-                  },
-                })
-              }
-            >
-              🎀 보호소 페이지 바로가기{" "}
-              <img src="../images/components/rightBtn.svg" />
-            </D.BtnBox>
-          </D.BtnWrapper>
-        </D.DetailBox>
-      </D.Box>
+            </D.BtnWrapper>
+          </D.DetailBox>
+        </D.Box>
+      )}
     </D.Container>
   );
 };

@@ -5,63 +5,37 @@ import { useNavigate, useLocation } from "react-router-dom";
 const Container = styled.div``;
 const Box = styled.div`
   display: flex;
-  // justify-content: space-between;
+  justify-content: space-between;
   align-items: center;
-  padding: 20px 20px;
-  // margin-top: 10px;
+  padding: 5px 20px;
+  margin-top: 18px;
+  position: relative;
 `;
 
-const Logo = styled.img`
-  width: 70px;
-  // height: 12.467px;
-  flex-shrink: 0;
+const Logo1 = styled.img`
+  width: 50px;
+`;
+const Logo2 = styled.img`
+  width: 80px;
 `;
 
 const BackBtn = styled.img`
   cursor: pointer;
 `;
 
-const FilterBtn = styled.img`
-  width: 22px;
-  cursor: pointer;
+const CenterText = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  color: #000;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
 `;
 
-const MentBox = styled.img`
-  padding-left: 20px;
-`;
-
-const DetailText = styled.div`
-  color: #000;
-  text-align: center;
-  font-feature-settings: "liga" off, "clig" off;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%; /* 18px */
-  letter-spacing: 0.2px;
-  margin-left: 50%;
-`;
-const Text = styled.div`
-  color: #000;
-  text-align: center;
-  font-feature-settings: "liga" off, "clig" off;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  margin-left: 25%;
-`;
-const SaveText = styled.div`
-  color: #000;
-  text-align: center;
-  font-feature-settings: "liga" off, "clig" off;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  margin-left: 35%;
-`;
 const Header = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -69,30 +43,18 @@ const Header = ({ type }) => {
   const isFilterPage = location.pathname.startsWith("/Filter");
   const isAnimalPage = location.pathname.startsWith("/AnimalList");
   const isSavePage = location.pathname.startsWith("/SavePage");
+  const isSearchPage = location.pathname.startsWith("/SearchPage");
 
   return (
     <Container>
       <Box>
         {/* 헤더 로고버전 */}
         {type === "logo" && (
-          <Logo src="../images/components/new_logo.svg" alt="logo" />
+          <Logo1 src="../images/components/new_logo.svg" alt="logo" />
         )}
         {type === "logo" && (
-          <MentBox
-            src="../images/header_ment/ment1.svg"
-            alt="ment"
-            // onClick={() => navigate("/Filter")}
-          />
+          <Logo2 src="../images/components/TextLogo.svg" alt="logo" />
         )}
-
-        {/* 
-        {type === "logo" && (
-          <FilterBtn
-            src="../images/components/filter.svg"
-            alt="filter"
-            onClick={() => navigate("/Filter")}
-          />
-        )} */}
 
         {/* 헤더 isOnlyBack  필터헤더 버전 */}
         {type === "onlyBack" && (
@@ -102,9 +64,10 @@ const Header = ({ type }) => {
             onClick={() => navigate(-1)}
           />
         )}
-        {isFilterPage && <DetailText>상세페이지</DetailText>}
-        {isAnimalPage && <Text>유기동물 리스트 조회</Text>}
-        {isSavePage && <SaveText>저장 목록</SaveText>}
+        {isFilterPage && <CenterText>상세페이지</CenterText>}
+        {isAnimalPage && <CenterText>유기동물 리스트 조회</CenterText>}
+        {isSavePage && <CenterText>저장 목록</CenterText>}
+        {isSearchPage && <CenterText>검색 결과</CenterText>}
       </Box>
     </Container>
   );

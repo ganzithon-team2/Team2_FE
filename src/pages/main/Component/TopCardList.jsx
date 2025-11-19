@@ -8,8 +8,7 @@ import API from "../../../api/axiosInstance";
 const Wrapper = styled.div`
   width: 100%;
   overflow: hidden;
-  // padding: 20px 0;
-  padding-bottom: 15px;
+  padding: 5px 0;
 `;
 
 const ScrollContainer = styled.div`
@@ -30,6 +29,16 @@ const CardWrapper = styled.div`
   scroll-snap-align: center;
   display: flex;
   justify-content: center;
+`;
+const Ment = styled.div`
+  color: #868da6;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: Pretendard;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  //   line-height: 150%; /* 21px */
+  margin: 0 30px;
 `;
 
 const TopCardList = () => {
@@ -99,6 +108,7 @@ const TopCardList = () => {
   };
   return (
     <Wrapper>
+      <Ment>오늘의 인연을 만나보세요</Ment>
       <ScrollContainer ref={scrollRef} onScroll={handleScroll}>
         {animals.map((item, idx) => (
           <CardWrapper key={idx} ref={idx === 0 ? cardRef : null}>

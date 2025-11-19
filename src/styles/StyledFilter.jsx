@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import Select from "react-select";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  padding-top: 20px;
+`;
 export const Box = styled.div``;
 
 // Select 디자인

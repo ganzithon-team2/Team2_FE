@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { userManager } from "../../../oidc-config";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -32,6 +33,7 @@ export default function OidcCallback() {
           localStorage.setItem("refresh", res.data.data.refreshToken);
           localStorage.setItem("nickname", res.data.data.nickname);
           localStorage.setItem("userId", res.data.data.userId);
+          alert("로그인 성공! 😊");
           navigate("/WelcomePage");
         } catch (err) {
           console.error("Backend API Error:", err);
@@ -44,5 +46,5 @@ export default function OidcCallback() {
       });
   }, [navigate]);
 
-  return <div>로그인 성공! 이동 중...</div>;
+  return <LoadingSpinner />;
 }

@@ -6,6 +6,7 @@ import BottomCard from "./Component/BottomCard";
 import { useNavigate } from "react-router-dom";
 
 import API from "../../api/axiosInstance";
+import MainBtn from "../../components/MainBtn";
 
 const MainPage = () => {
   const [selectedTab, setSelectedTab] = useState("all");
@@ -13,6 +14,15 @@ const MainPage = () => {
 
   const [bottomList, setBottomList] = useState([]);
   const [userLikes, setUserLikes] = useState([]);
+
+  // 무한스크롤
+  const [page, setPage] = useState(0);
+  const [isLast, setIsLast] = useState(false);
+  const bottomBoxRef = React.useRef(null);
+  const bottomRef = React.useRef(null);
+
+  // 스크롤
+  const [hideTop, setHideTop] = useState(false);
 
   useEffect(() => {
     const fetchUserLikes = async () => {
@@ -26,22 +36,71 @@ const MainPage = () => {
 
   useEffect(() => {
     const fetchBottomList = async () => {
+      if (isLast) return;
+
       try {
         const res = await API.get("/api/animals", {
           params: {
-            page: 0,
+            page,
             size: 20,
-            isLatest: true, // 최신순으로 20개 가져오기
+            isLatest: true,
           },
         });
 
-        setBottomList(res.data.data.content);
+        const newContent = res.data.data.content;
+
+        // 중복 제거 포함해서 업데이트
+        setBottomList((prev) => {
+          const combined = [...prev, ...newContent];
+          return Array.from(
+            new Map(combined.map((item) => [item.desertionNo, item])).values()
+          );
+        });
+
+        setIsLast(res.data.data.last);
       } catch (err) {
         console.error("BottomCard API error:", err);
       }
     };
 
     fetchBottomList();
+  }, [page]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isLast) {
+          setPage((prev) => prev + 1);
+        }
+      },
+      {
+        root: bottomBoxRef.current,
+        threshold: 1,
+      }
+    );
+
+    if (bottomRef.current) observer.observe(bottomRef.current);
+    return () => observer.disconnect();
+  }, [isLast]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          } else {
+            entry.target.classList.remove("show");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const elements = document.querySelectorAll(".fade-in");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
   }, []);
 
   const tabList = [
@@ -60,25 +119,44 @@ const MainPage = () => {
         );
 
   return (
-    <M.Container>
+    <M.Container
+      onScroll={(e) => {
+        const y = e.target.scrollTop;
+        setHideTop(y > 30);
+      }}
+    >
       <M.Box>
-        <TopCardList userLikes={userLikes} />
-        {/* 탭바 */}
-        <M.TapBar>
-          {tabList.map((tab) => {
-            return (
-              <M.TapName
-                key={tab.key}
-                $active={selectedTab === tab.key}
-                onClick={() => setSelectedTab(tab.key)}
-              >
-                {tab.label}
-              </M.TapName>
-            );
-          })}
-        </M.TapBar>
+        <M.TopBox $hide={hideTop}>
+          <TopCardList userLikes={userLikes} />
+        </M.TopBox>
+
+        <M.StikyWrapper>
+          <MainBtn />
+
+          {/* 탭바 */}
+
+          <M.TapBar>
+            {tabList.map((tab) => {
+              return (
+                <M.TapName
+                  key={tab.key}
+                  $active={selectedTab === tab.key}
+                  onClick={() => setSelectedTab(tab.key)}
+                >
+                  {tab.label}
+                </M.TapName>
+              );
+            })}
+
+            <M.FilterBtn
+              src="/images/components/filter.svg"
+              alt="filter"
+              onClick={() => navigate("/Filter")}
+            />
+          </M.TapBar>
+        </M.StikyWrapper>
         {/* 무한스크롤 카드 */}
-        <M.BottomBox>
+        <M.BottomBox ref={bottomBoxRef} $scroll={hideTop}>
           {filterData.map((item) => (
             <BottomCard
               key={item.desertionNo}
@@ -86,6 +164,7 @@ const MainPage = () => {
               userLikes={userLikes}
             />
           ))}
+          <div ref={bottomRef} style={{ height: "1px" }} />
         </M.BottomBox>
       </M.Box>
     </M.Container>

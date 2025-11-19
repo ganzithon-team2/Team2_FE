@@ -4,6 +4,7 @@ import Select from "react-select";
 import Checkbox from "@mui/material/Checkbox";
 import { useNavigate } from "react-router-dom";
 import API from "../../api/axiosInstance";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const filterConfig = {
   type: [
@@ -74,7 +75,7 @@ const Filter = ({ onSearch }) => {
           }))
         );
       } catch (err) {
-        console.error("❌ 시/도 목록 조회 실패:", err);
+        console.error("시/도 목록 조회 실패:", err);
       }
     };
 

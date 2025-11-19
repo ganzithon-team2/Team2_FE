@@ -28,6 +28,7 @@ export const TapBar = styled.div`
   padding: 5px 24px;
   // border-bottom: 1px solid #f0b2c0;
   position: relative;
+  margin-bottom: 15px;
 `;
 
 export const TapName = styled.div`
