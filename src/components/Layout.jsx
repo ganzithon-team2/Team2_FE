@@ -77,6 +77,7 @@ const Layout = () => {
     "/SearchPage",
     "/Shelter",
     "/AnimalList",
+    "/RecommPage",
   ];
 
   const isShowNav = navPages.includes(location.pathname);
@@ -89,6 +90,7 @@ const Layout = () => {
     "/ChatbotPage",
     "/SavePage",
     "/AnimalList",
+    "/RecommPage",
   ];
 
   const isAuthPage =
