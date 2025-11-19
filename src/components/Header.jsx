@@ -64,6 +64,16 @@ const SaveText = styled.div`
   font-weight: 400;
   margin-right: 40%;
 `;
+
+const AIText = styled.div`
+  color: #000;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  margin-right: 39%;
+  font-weight: 400;
+`;
 const Header = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -71,6 +81,7 @@ const Header = ({ type }) => {
   const isFilterPage = location.pathname.startsWith("/Filter");
   const isAnimalPage = location.pathname.startsWith("/AnimalList");
   const isSavePage = location.pathname.startsWith("/SavePage");
+  const isAIRecommList = location.pathname.startsWith("/AIRecommList");
 
   return (
     <Container>
@@ -99,7 +110,7 @@ const Header = ({ type }) => {
         {isFilterPage && <DetailText>상세페이지</DetailText>}
         {isAnimalPage && <Text>유기동물 리스트 조회</Text>}
         {isSavePage && <SaveText>저장 목록</SaveText>}
-        {/* <isAIRecommPage && <Text>AI 추천 목록</Text> } */}
+        {isAIRecommList && <AIText>AI 추천 목록</AIText>}
       </Box>
     </Container>
   );
