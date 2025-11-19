@@ -32,7 +32,7 @@ export default function OidcCallback() {
           localStorage.setItem("refresh", res.data.data.refreshToken);
           localStorage.getItem("userId", res.data.data.userId);
           localStorage.setItem("nickname", res.data.data.nickname);
-
+          localStorage.setItem("userId", res.data.data.userId);
           navigate("/WelcomePage");
         } catch (err) {
           console.error("Backend API Error:", err);
