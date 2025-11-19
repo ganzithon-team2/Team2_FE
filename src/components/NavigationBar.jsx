@@ -64,32 +64,36 @@ const ChatBotButton = styled.button`
 const NavigationBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const tabs = [
     {
       path: "/MainPage",
       label: "홈",
       icon: "/images/common/homeIcon.png",
+      fill_icon: "/images/common/homeIconFilled.png",
     },
     {
       path: "/RecommPage",
-      label: "저장",
-      icon: "",
-
+      label: "추천",
+      icon: "/images/common/recommIcon.png",
+      fill_icon: "/images/common/recommIconFilled.png",
     },
     {
       path: "/SavePage",
       label: "저장",
       icon: "/images/common/heartIcon.png",
+      fill_icon: "/images/common/heartIconFilled.png",
     },
     {
-      path: "/MyPage"
-    }
+      path: "/MyPage",
+      label: "마이페이지",
+      icon: "/images/common/userIcon.png",
+      fill_icon: "/images/common/userIconFilled.png",
+    },
   ];
 
   return (
     <NavContainer>
-      <ChatBotButton onClick={() => navigate("/ChatbotPage")}>
+      {/* <ChatBotButton onClick={() => navigate("/ChatbotPage")}>
         <img
           src={chatbot}
           style={{
@@ -109,21 +113,30 @@ const NavigationBar = () => {
         >
           챗봇
         </p>
-      </ChatBotButton>
+      </ChatBotButton> */}
       <NavBar>
-        {tabs.map((tab) => (
-          <NavItem
-            key={tab.path}
-            $active={location.pathname === tab.path}
-            onClick={() => navigate(tab.path)}
-          >
-            <img
-              src={tab.icon}
-              style={{ width: "24px", marginBotton: "4px" }}
-            />
-            <p style={{ padding: "3px" }}>{tab.label}</p>
-          </NavItem>
-        ))}
+        {tabs.map((tab) => {
+          const isActive = location.pathname === tab.path;
+
+          return (
+            <NavItem
+              key={tab.path}
+              $active={isActive}
+              onClick={() => navigate(tab.path)}
+            >
+              <img
+                src={isActive ? tab.fill_icon : tab.icon}
+                style={{ width: "24px", marginBotton: "4px" }}
+              />
+              <p style={{ color: isActive ? "#FF5E82" : "#868DA6" 
+                
+              }}>
+                {tab.label}
+              </p>
+            </NavItem>
+          );
+        })}
+        ;
       </NavBar>
     </NavContainer>
   );
