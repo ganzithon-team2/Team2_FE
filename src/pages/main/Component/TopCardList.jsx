@@ -8,16 +8,17 @@ import API from "../../../api/axiosInstance";
 const Wrapper = styled.div`
   width: 100%;
   overflow: hidden;
-  padding: 20px 0;
+  // padding: 20px 0;
+  padding-bottom: 15px;
 `;
 
 const ScrollContainer = styled.div`
   display: flex;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-snap-stop: always;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scroll-snap-stop: always;
 
   &::-webkit-scrollbar {
     display: none;
@@ -33,86 +34,74 @@ const CardWrapper = styled.div`
 
 const TopCardList = () => {
   const scrollRef = useRef(null);
+  const cardRef = useRef(null);
+
   const [animals, setAnimals] = useState([]);
-
-  // const infiniteData = [...mock, ...mock, ...mock, ...mock, ...mock];
-
-  // useEffect(() => {
-  //   const container = scrollRef.current;
-  //   if (!container) return;
-
-  //   container.style.scrollBehavior = "auto";
-
-  //   const cardWidth = container.clientWidth * 0.8 + 20;
-  //   const middleIndex = mock.length * 2;
-
-  //   container.scrollLeft = cardWidth * middleIndex;
-
-  //   setTimeout(() => {
-  //     container.style.scrollBehavior = "smooth";
-  //   }, 50);
-  // }, []);
-
+  const [original, setOriginal] = useState([]);
   useEffect(() => {
-    const fetchRandomAnimals = async () => {
+    async function load() {
       try {
-        // 1) 동물 리스트 200개 불러오기 (랜덤 뽑기용)
         const res = await API.get("/api/animals", {
-          params: {
-            page: 0,
-            size: 200, // 데이터 많이 받을수록 랜덤 다양함
-            isLatest: false, // 최신순 정렬 (옵션)
-          },
+          params: { page: 0, size: 200, isLatest: false },
         });
 
         const list = res.data.data.content;
-        // 백엔드가 Page 형태로 줄 가능성 높음 (content 안에 리스트 있음)
+        const five = list.sort(() => Math.random() - 0.5).slice(0, 5);
+        setOriginal(five);
 
-        if (!list || list.length === 0) return;
+        // 처음 3세트로 구성해서 자연스럽게 시작
+        setAnimals([...five, ...five, ...five]);
 
-        // 2) 랜덤 5개 선택
-        const randomFive = list.sort(() => Math.random() - 0.5).slice(0, 5);
-
-        // 3) 무한 슬라이드용 데이터 확장
-        const repeated = [
-          ...randomFive,
-          ...randomFive,
-          ...randomFive,
-          ...randomFive,
-          ...randomFive,
-        ];
-
-        setAnimals(repeated);
-
-        // 4) 초기 스크롤 위치 세팅
+        // 초기 위치 중앙 세트로 이동
         setTimeout(() => {
           const container = scrollRef.current;
-          if (!container) return;
+          const width = cardRef.current.offsetWidth + 12;
 
           container.style.scrollBehavior = "auto";
-
-          const cardWidth = container.clientWidth * 0.8 + 20;
-          const middleIndex = randomFive.length * 2;
-
-          container.scrollLeft = cardWidth * middleIndex;
-
-          setTimeout(() => {
-            container.style.scrollBehavior = "smooth";
-          }, 50);
-        }, 0);
-      } catch (err) {
-        console.error("TopCard Random Error:", err);
+          container.scrollLeft = width * five.length; // index 5부터
+          container.style.scrollBehavior = "smooth";
+        }, 30);
+      } catch (e) {
+        console.error(e);
       }
-    };
+    }
 
-    fetchRandomAnimals();
+    load();
   }, []);
 
+  const handleScroll = () => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const cardWidth = cardRef.current.offsetWidth + 12;
+
+    // 오른쪽 끝 가까움 → 뒤에 추가
+    if (
+      container.scrollLeft + container.clientWidth >=
+      container.scrollWidth - cardWidth * 2
+    ) {
+      setAnimals((prev) => [...prev, ...original]);
+    }
+
+    // 왼쪽 끝 가까움 → 앞에 추가
+    if (container.scrollLeft <= cardWidth * 2) {
+      const prevScrollLeft = container.scrollLeft;
+
+      setAnimals((prev) => [...original, ...prev]);
+
+      // 앞에 추가했으므로 scrollLeft 보정
+      requestAnimationFrame(() => {
+        container.style.scrollBehavior = "auto";
+        container.scrollLeft = prevScrollLeft + cardWidth * original.length;
+        container.style.scrollBehavior = "smooth";
+      });
+    }
+  };
   return (
     <Wrapper>
-      <ScrollContainer ref={scrollRef}>
+      <ScrollContainer ref={scrollRef} onScroll={handleScroll}>
         {animals.map((item, idx) => (
-          <CardWrapper key={`${idx}-${item.desertionNo}`}>
+          <CardWrapper key={idx} ref={idx === 0 ? cardRef : null}>
             <TopCard data={item} />
           </CardWrapper>
         ))}

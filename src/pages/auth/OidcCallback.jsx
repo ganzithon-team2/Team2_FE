@@ -20,15 +20,11 @@ export default function OidcCallback() {
 
         try {
           // 2. 하드코딩된 주소 대신 환경 변수를 사용합니다.
-          const res = await axios.post(
-            `${API_BASE_URL}/api/auth/login`,
-            null,
-            {
-              headers: {
-                id_token: idToken,
-              },
-            }
-          );
+          const res = await axios.post(`${API_BASE_URL}/api/auth/login`, null, {
+            headers: {
+              id_token: idToken,
+            },
+          });
 
           console.log("Backend Login Success:", res.data);
 

@@ -6,18 +6,21 @@ export const Container = styled.div`
   // margin-top: 10px;
 `;
 export const Box = styled.div`
-  margin: 0 auto;
-  padding: 10px 10px;
+  // border: 1px solid #333;
+  // margin: 0 auto;
+  // padding: 10px 10px;
   display: flex;
 
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   flex-shrink: 0;
   cursor: pointer;
 
-  border-radius: 24px;
-  margin-top: 10px;
+  // border-radius: 24px;
+  // margin-top: 10px;
+  margin-bottom: 30px;
 
   transition: all 0.2s ease;
   &:hover {
@@ -26,9 +29,9 @@ export const Box = styled.div`
   }
 `;
 export const Img = styled.img`
-  width: 160px;
-  height: 225px;
-  border-radius: 15px;
+  width: 150px;
+  height: 150px;
+  border-radius: 30px;
   object-fit: cover;
   object-position: center;
   box-shadow: 3px 2px 6.6px rgba(0, 0, 0, 0.25);
@@ -45,12 +48,27 @@ export const Code = styled.div`
   font-weight: 500;
   line-height: 150%; /* 15px */
 `;
+
 export const Info = styled.div`
+  margin-top: 5px;
   color: var(--Neutral-Colors-500, #868da6);
-  font-feature-settings: "liga" off, "clig" off;
+
   font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 450;
+
+  width: 150px;
+`;
+
+export const InfoName = styled.div`
+  overflow: hidden;
+  color: #868da6;
+  font-feature-settings: "liga" off, "clig" off;
+  text-overflow: ellipsis;
+  font-family: Pretendard;
   font-size: 12px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 800;
   line-height: 150%; /* 18px */
 `;
