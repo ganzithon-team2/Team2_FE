@@ -4,6 +4,7 @@ export const Container = styled.div``;
 
 export const Box = styled.div``;
 
+// 탭바
 export const TapBar = styled.div`
   display: flex;
   gap: 16px;

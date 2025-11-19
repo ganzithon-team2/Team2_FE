@@ -6,21 +6,16 @@ import { saveFavorite } from "../utils/favorites";
 const Container = styled.div``;
 const Box = styled.div`
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
-  padding: 15px 25px;
-  margin-top: 20px;
+  padding: 20px 20px;
+  // margin-top: 10px;
 `;
 
 const Logo = styled.img`
-  width: 93px;
-  height: 12.467px;
+  width: 70px;
+  // height: 12.467px;
   flex-shrink: 0;
-`;
-
-const LikeBtn = styled.img`
-  width: 30px;
-  cursor: pointer;
 `;
 
 const BackBtn = styled.img`
@@ -30,6 +25,10 @@ const BackBtn = styled.img`
 const FilterBtn = styled.img`
   width: 22px;
   cursor: pointer;
+`;
+
+const MentBox = styled.img`
+  padding-left: 20px;
 `;
 
 const DetailText = styled.div`
@@ -42,7 +41,7 @@ const DetailText = styled.div`
   font-weight: 400;
   line-height: 150%; /* 18px */
   letter-spacing: 0.2px;
-  margin-right: 45%;
+  margin-left: 50%;
 `;
 const Text = styled.div`
   color: #000;
@@ -52,7 +51,7 @@ const Text = styled.div`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  margin-right: 32%;
+  margin-left: 25%;
 `;
 const SaveText = styled.div`
   color: #000;
@@ -62,7 +61,7 @@ const SaveText = styled.div`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  margin-right: 40%;
+  margin-left: 35%;
 `;
 
 const AIText = styled.div`
@@ -88,16 +87,24 @@ const Header = ({ type }) => {
       <Box>
         {/* 헤더 로고버전 */}
         {type === "logo" && (
-          <Logo src="../images/components/logo.svg" alt="logo" />
+          <Logo src="../images/components/new_logo.svg" alt="logo" />
+        )}
+        {type === "logo" && (
+          <MentBox
+            src="../images/header_ment/ment1.svg"
+            alt="ment"
+            // onClick={() => navigate("/Filter")}
+          />
         )}
 
+        {/* 
         {type === "logo" && (
           <FilterBtn
             src="../images/components/filter.svg"
             alt="filter"
             onClick={() => navigate("/Filter")}
           />
-        )}
+        )} */}
 
         {/* 헤더 isOnlyBack  필터헤더 버전 */}
         {type === "onlyBack" && (

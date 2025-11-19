@@ -26,20 +26,22 @@ const TopCard = ({ data }) => {
         <T.TopBox>
           <T.Img src={data.thumbnailImage} alt={data.breedName} />
           <T.Info>
-            <T.Name>{data.breedName}</T.Name>
-            <T.BrithText>
+            <T.Name>
+              {data.breedName} {data.sex}
+            </T.Name>
+            <T.AgeText>
               {data.age}
               <br />
-              {data.sex}
-            </T.BrithText>
+            </T.AgeText>
+            <T.DateText>등록일 : {formatDate(data.foundDate)}</T.DateText>
 
-            <T.Code>보호번호 {data.desertionNo}</T.Code>
+            {/* <T.Code>보호번호 {data.desertionNo}</T.Code> */}
             <T.ShelterName>{data.shelterName}</T.ShelterName>
           </T.Info>
         </T.TopBox>
         <T.BottomBox>
           {/* 공고일 정보가 없어 찾은일로 데이터 변경 */}
-          <T.Date>{formatDate(data.foundDate)}</T.Date>
+          {/* <T.Date>{formatDate(data.foundDate)}</T.Date> */}
           <T.GotoDetail onClick={handleClick}>보러가기</T.GotoDetail>
         </T.BottomBox>
       </T.Box>
