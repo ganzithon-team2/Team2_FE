@@ -4,7 +4,7 @@ export const IntroContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 390px;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
