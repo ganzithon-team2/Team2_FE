@@ -23,13 +23,22 @@ export const Box = styled.div`
   width: 100%;
 `;
 
-// export const TopBox = styled.div``;
 export const TopBox = styled.div`
-  transition: opacity 0.12s cubic-bezier(0.33, 0.01, 0.67, 1.01),
-    transform 0.12s cubic-bezier(0.33, 0.01, 0.67, 1.01);
+  transition: opacity 0.3s cubic-bezier(0.33, 0.01, 0.67, 1.01),
+    transform 0.3s cubic-bezier(0.33, 0.01, 0.67, 1.01);
   opacity: ${({ $hide }) => ($hide ? 0 : 1)};
   transform: translateY(${({ $hide }) => ($hide ? "-24px" : "0")});
   will-change: opacity, transform;
+  .wrapper {
+    transition: inherit;
+  }
+`;
+
+//테스트
+export const TestBox = styled.div`
+  width: 100%;
+
+  border: 1px solid #333;
 `;
 // 기능버튼
 export const StikyWrapper = styled.div`
@@ -37,7 +46,6 @@ export const StikyWrapper = styled.div`
   top: 0;
   z-index: 10;
   background: white;
-  padding-bottom: 8px;
 `;
 
 // 탭바
@@ -95,7 +103,8 @@ export const BottomBox = styled.div`
   grid-template-columns: repeat(2, 1fr);
   padding-top: 10px;
 
-  height: calc(100vh - 200px);
+  min-height: calc(100vh - 200px);
+  height: auto;
   padding-bottom: 20%;
   overflow-y: ${({ $scroll }) => ($scroll ? "auto" : "hidden")};
   scroll-behavior: smooth;

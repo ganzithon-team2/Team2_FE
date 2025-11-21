@@ -128,11 +128,10 @@ const MainPage = () => {
       <M.Box>
         <M.TopBox $hide={hideTop}>
           <TopCardList userLikes={userLikes} />
+          <MainBtn />
         </M.TopBox>
 
         <M.StikyWrapper>
-          <MainBtn />
-
           {/* 탭바 */}
 
           <M.TapBar>

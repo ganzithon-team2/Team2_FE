@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+  display: contents;
+`;
 const Ment = styled.div`
   color: #868da6;
   font-feature-settings: "liga" off, "clig" off;
@@ -28,7 +31,7 @@ const BtnWrap = styled.div`
   align-items: center;
   padding-bottom: 10px;
   width: 150px;
-  height: 140px;
+  height: auto;
   flex-shrink: 0;
   border-radius: 14px;
   border: 2px solid #f1b3c1;
@@ -36,7 +39,7 @@ const BtnWrap = styled.div`
   box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.25);
   transition: all 0.2s ease;
   &:hover {
-    transform: translateY(-4px); /* 위로 4px 떠오름 */
+    // transform: translateY(-4px); /* 위로 4px 떠오름 */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* 그림자 더 진하게 */
   }
 
