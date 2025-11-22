@@ -64,19 +64,28 @@ const Detail = () => {
   useEffect(() => {
     if (!desertionNo || !userId) return;
 
-    const sendInterest = async () => {
-      try {
-        await API.post(`/api/admin/user-interests/${userId}`, {
-          desertionNo,
-          dwellTimeSeconds: 25,
-        });
-        console.log("관심 로그 전송 완료");
-      } catch (err) {
-        console.error("관심 로그 전송 실패:", err);
-      }
-    };
+    const startTime = Date.now(); // 페이지 진입 시간 기록
 
-    sendInterest();
+    return () => {
+      const endTime = Date.now();
+      const dwellSeconds = Math.floor((endTime - startTime) / 1000);
+
+      const cappedSeconds = Math.min(dwellSeconds, 25);
+
+      const sendInterest = async () => {
+        try {
+          await API.post(`/api/admin/user-interests/${userId}`, {
+            desertionNo,
+            dwellTimeSeconds: cappedSeconds,
+          });
+          console.log("관심 로그 전송 완료:", cappedSeconds);
+        } catch (err) {
+          console.error("관심 로그 전송 실패:", err);
+        }
+      };
+
+      sendInterest();
+    };
   }, [desertionNo, userId]);
 
   // 북마크 초기 상태 조회
@@ -213,8 +222,7 @@ const Detail = () => {
                   open={openMemo}
                   onClick={() => setOpenMemo(!openMemo)}
                 >
-                  💕 성격 메모{" "}
-                  <img src="../images/components/rightBtn.svg" />
+                  💕 성격 메모 <img src="../images/components/rightBtn.svg" />
                 </D.BtnBox>
                 <D.SlideBox open={openMemo}>
                   {data.personality ? (
