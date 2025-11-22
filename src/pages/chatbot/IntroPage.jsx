@@ -5,6 +5,7 @@ import boniImg from "/images/chatbot/boni-character.png";
 import { useNavigate } from "react-router-dom";
 
 const IntroPage = ({ inputValue, setInputValue, onSend }) => {
+  const nickname = localStorage.getItem("nickname");
   // FAQ 클릭, 바로 ChatPage로 전환 + 메시지 자동 전송
   const handleFaqClick = (text) => {
     onSend(text);
@@ -21,7 +22,7 @@ const IntroPage = ({ inputValue, setInputValue, onSend }) => {
     <C.IntroContainer>
       {/* 상단 이미지 영역 (너의 기존 디자인 기준) */}
       <C.VisualArea>
-        <C.VisualTextTop>안녕하세요</C.VisualTextTop>
+        <C.VisualTextTop>안녕하세요, {nickname}님</C.VisualTextTop>
 
         <C.VisualImage src={boniImg} alt="boni" />
 

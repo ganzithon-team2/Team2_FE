@@ -395,7 +395,6 @@ export const IntroInputArea = styled.div`
   right: 0;
   bottom: 0;
   padding: 2px 10px 15px;
-  background: transparent;
-  background-color: #ffffff;
+  background-color: #ffffff8f;
   z-index: 10;
 `;
